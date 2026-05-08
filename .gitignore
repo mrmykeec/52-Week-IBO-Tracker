@@ -179,3 +179,19 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# --- 52-Week IBO Tracker custom rules ---
+
+# Private curriculum PDF (Carrithers' material, do not publish)
+52-Week Training.pdf
+*.pdf
+
+# Abandoned spreadsheet output
+tracker.xlsx
+
+# Windows clutter
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Mac clutter
+.DS_Store

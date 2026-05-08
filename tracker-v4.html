@@ -1,0 +1,3511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" id="theme-color-meta" content="#a855f7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IBO Tracker">
+  <meta name="format-detection" content="telephone=no">
+  <title>52-Week IBO Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Theme palette (default = plum) ─────────────────────────────── */
+    :root {
+      --c-50:  #faf5ff;
+      --c-100: #f3e8ff;
+      --c-200: #e9d5ff;
+      --c-300: #d8b4fe;
+      --c-400: #c084fc;
+      --c-500: #a855f7;
+      --c-600: #9333ea;
+      --c-700: #7e22ce;
+      --c-800: #6b21a8;
+      --c-900: #581c87;
+      --a-300: #f9a8d4;
+      --a-400: #f472b6;
+      --a-500: #ec4899;
+      --a-bg-50:  #fdf2f8;
+      --a-bg-100: #fce7f3;
+      --t-mid:  #7c3aed;
+      --bg-soft: #ede9fe;
+      --bg-extra: #fae8ff;
+      --c-500-rgb: 168, 85, 247;
+      --c-700-rgb: 126, 34, 206;
+      --a-500-rgb: 236, 72, 153;
+      --ink: #2e1065;
+    }
+
+    [data-theme="ocean"] {
+      --c-50:  #ecfeff;
+      --c-100: #cffafe;
+      --c-200: #a5f3fc;
+      --c-300: #67e8f9;
+      --c-400: #22d3ee;
+      --c-500: #06b6d4;
+      --c-600: #0891b2;
+      --c-700: #0e7490;
+      --c-800: #155e75;
+      --c-900: #164e63;
+      --a-300: #5eead4;
+      --a-400: #2dd4bf;
+      --a-500: #14b8a6;
+      --a-bg-50:  #f0fdfa;
+      --a-bg-100: #ccfbf1;
+      --t-mid:  #0891b2;
+      --bg-soft: #cffafe;
+      --bg-extra: #ccfbf1;
+      --c-500-rgb: 6, 182, 212;
+      --c-700-rgb: 14, 116, 144;
+      --a-500-rgb: 20, 184, 166;
+      --ink: #042f3a;
+    }
+
+    [data-theme="sunset"] {
+      --c-50:  #fff7ed;
+      --c-100: #ffedd5;
+      --c-200: #fed7aa;
+      --c-300: #fdba74;
+      --c-400: #fb923c;
+      --c-500: #f97316;
+      --c-600: #ea580c;
+      --c-700: #c2410c;
+      --c-800: #9a3412;
+      --c-900: #7c2d12;
+      --a-300: #f9a8d4;
+      --a-400: #f472b6;
+      --a-500: #ec4899;
+      --a-bg-50:  #fdf2f8;
+      --a-bg-100: #fce7f3;
+      --t-mid:  #c2410c;
+      --bg-soft: #ffedd5;
+      --bg-extra: #fce7f3;
+      --c-500-rgb: 249, 115, 22;
+      --c-700-rgb: 194, 65, 12;
+      --a-500-rgb: 236, 72, 153;
+      --ink: #431407;
+    }
+
+    [data-theme="forest"] {
+      --c-50:  #ecfdf5;
+      --c-100: #d1fae5;
+      --c-200: #a7f3d0;
+      --c-300: #6ee7b7;
+      --c-400: #34d399;
+      --c-500: #10b981;
+      --c-600: #059669;
+      --c-700: #047857;
+      --c-800: #065f46;
+      --c-900: #064e3b;
+      --a-300: #bef264;
+      --a-400: #a3e635;
+      --a-500: #84cc16;
+      --a-bg-50:  #f7fee7;
+      --a-bg-100: #ecfccb;
+      --t-mid:  #047857;
+      --bg-soft: #d1fae5;
+      --bg-extra: #ecfccb;
+      --c-500-rgb: 16, 185, 129;
+      --c-700-rgb: 4, 120, 87;
+      --a-500-rgb: 132, 204, 22;
+      --ink: #022c1a;
+    }
+
+    [data-theme="slate"] {
+      --c-50:  #eef2ff;
+      --c-100: #e0e7ff;
+      --c-200: #c7d2fe;
+      --c-300: #a5b4fc;
+      --c-400: #818cf8;
+      --c-500: #6366f1;
+      --c-600: #4f46e5;
+      --c-700: #4338ca;
+      --c-800: #3730a3;
+      --c-900: #312e81;
+      --a-300: #c4b5fd;
+      --a-400: #a78bfa;
+      --a-500: #8b5cf6;
+      --a-bg-50:  #f5f3ff;
+      --a-bg-100: #ede9fe;
+      --t-mid:  #4338ca;
+      --bg-soft: #e0e7ff;
+      --bg-extra: #ede9fe;
+      --c-500-rgb: 99, 102, 241;
+      --c-700-rgb: 67, 56, 202;
+      --a-500-rgb: 139, 92, 246;
+      --ink: #1e1b4b;
+    }
+
+    [data-theme="cb"] {
+      --c-50:  #f0f7fc;
+      --c-100: #d6e4f0;
+      --c-200: #a8c0d8;
+      --c-300: #7099bd;
+      --c-400: #56b4e9;
+      --c-500: #0072b2;
+      --c-600: #005a8c;
+      --c-700: #003d6b;
+      --c-800: #002a4a;
+      --c-900: #001f3f;
+      --a-300: #f5c66b;
+      --a-400: #f0b040;
+      --a-500: #e69f00;
+      --a-bg-50:  #fff8e6;
+      --a-bg-100: #fcebc2;
+      --t-mid:  #0072b2;
+      --bg-soft: #d6e4f0;
+      --bg-extra: #fcebc2;
+      --c-500-rgb: 0, 114, 178;
+      --c-700-rgb: 0, 61, 107;
+      --a-500-rgb: 230, 159, 0;
+      --ink: #001f3f;
+    }
+
+    /* ── Theme picker ─────────────────────────────────────────────── */
+    .theme-picker {
+      display:flex; align-items:center; gap:10px;
+      padding:8px 14px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border:1px solid rgba(var(--c-500-rgb), 0.18);
+      border-radius:99px;
+      width:fit-content;
+      margin: 0 auto 14px auto;
+      box-shadow: 0 4px 12px -4px rgba(var(--c-700-rgb), 0.18);
+    }
+    .theme-picker-label {
+      font-size:.7rem; font-weight:700; color: var(--c-800);
+      text-transform:uppercase; letter-spacing:.06em;
+    }
+    .swatch-btn {
+      width:30px; height:30px; min-width:30px;
+      border-radius:99px; border:2px solid transparent;
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      position:relative; padding:0;
+    }
+    .swatch-btn:hover { transform: scale(1.1); }
+    .swatch-btn.active { border-color: var(--c-700); box-shadow: 0 0 0 3px rgba(var(--c-500-rgb), 0.25); }
+    .swatch-btn:focus-visible {
+      outline:none;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--c-700);
+    }
+    .swatch-btn[data-swatch="plum"]   { background: linear-gradient(135deg, #7e22ce, #ec4899); }
+    .swatch-btn[data-swatch="ocean"]  { background: linear-gradient(135deg, #0e7490, #14b8a6); }
+    .swatch-btn[data-swatch="sunset"] { background: linear-gradient(135deg, #c2410c, #ec4899); }
+    .swatch-btn[data-swatch="forest"] { background: linear-gradient(135deg, #047857, #84cc16); }
+    .swatch-btn[data-swatch="slate"]  { background: linear-gradient(135deg, #4338ca, #8b5cf6); }
+    .swatch-btn[data-swatch="cb"]     {
+      background: linear-gradient(135deg, #003d6b, #e69f00);
+    }
+    .swatch-btn[data-swatch="cb"]::after {
+      content:"♿"; position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.7rem; color:#fff;
+      pointer-events:none;
+    }
+
+    /* Hover/focus label tooltip */
+    .swatch-btn::before {
+      content: attr(data-label);
+      position:absolute;
+      bottom: calc(100% + 10px);
+      left:50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--c-900);
+      color:#fff;
+      font-size:.7rem; font-weight:700;
+      padding:5px 10px;
+      border-radius:7px;
+      white-space:nowrap;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .15s ease, transform .15s ease;
+      z-index:5;
+      letter-spacing:.02em;
+    }
+    .swatch-btn:hover::before, .swatch-btn:focus-visible::before {
+      opacity:1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Mode picker (light/dark/auto) ────────────────────────────── */
+    .mode-picker {
+      display:flex; align-items:center; gap:6px;
+      padding:6px 12px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border:1px solid rgba(var(--c-500-rgb), 0.18);
+      border-radius:99px;
+      width:fit-content;
+      margin: 4px auto 0 auto;
+      box-shadow: 0 4px 12px -4px rgba(var(--c-700-rgb), 0.18);
+    }
+    .mode-btn {
+      width:30px; height:30px;
+      border-radius:99px;
+      border:2px solid transparent;
+      background: transparent;
+      color: var(--c-800);
+      cursor:pointer;
+      font-size:.92rem;
+      display:flex; align-items:center; justify-content:center;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      padding:0;
+      position:relative;
+    }
+    .mode-btn:hover { background: rgba(var(--c-500-rgb), 0.12); transform: scale(1.05); }
+    .mode-btn.active {
+      background: rgba(var(--c-500-rgb), 0.18);
+      border-color: var(--c-700);
+    }
+    .mode-btn:focus-visible {
+      outline:none;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--c-700);
+    }
+    .mode-btn::before {
+      content: attr(data-label);
+      position:absolute;
+      bottom: calc(100% + 8px); left:50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--c-900); color:#fff;
+      font-size:.7rem; font-weight:700;
+      padding:5px 10px; border-radius:7px;
+      white-space:nowrap;
+      opacity:0; pointer-events:none;
+      transition: opacity .15s ease, transform .15s ease;
+      z-index:5;
+    }
+    .mode-btn:hover::before, .mode-btn:focus-visible::before {
+      opacity:1; transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Dark mode overrides ──────────────────────────────────────── */
+    [data-mode="dark"] body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(var(--c-500-rgb), 0.18) 0%, transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(var(--a-500-rgb), 0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #0d0a1a 0%, #08060f 100%);
+      color: #ede9fe;
+    }
+    [data-mode="dark"] .card {
+      background: rgba(28, 22, 44, 0.85) !important;
+      border-color: rgba(var(--c-500-rgb), 0.25) !important;
+    }
+    [data-mode="dark"] .month-summary,
+    [data-mode="dark"] .goals-card {
+      background: linear-gradient(135deg, rgba(28,22,44,0.92), rgba(40,24,52,0.92)) !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .week-card {
+      background: rgba(28, 22, 44, 0.85) !important;
+      border-color: rgba(var(--c-500-rgb), 0.22) !important;
+    }
+    [data-mode="dark"] .week-card.complete {
+      background: linear-gradient(135deg, rgba(45,28,68,0.9), rgba(60,28,60,0.9)) !important;
+      border-color: rgba(var(--c-500-rgb), 0.45) !important;
+    }
+    [data-mode="dark"] .toast-box,
+    [data-mode="dark"] .theme-picker,
+    [data-mode="dark"] .mode-picker {
+      background: rgba(28, 22, 44, 0.92) !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .sticky-nav {
+      background: rgba(28, 22, 44, 0.85) !important;
+    }
+
+    /* Text in dark mode */
+    [data-mode="dark"] .ms-title,
+    [data-mode="dark"] .week-info .w-title,
+    [data-mode="dark"] .goals-card h3,
+    [data-mode="dark"] .toast-title,
+    [data-mode="dark"] .credits strong,
+    [data-mode="dark"] .month-card .m-pct,
+    [data-mode="dark"] .week-pip .wp-pct,
+    [data-mode="dark"] .task-item span,
+    [data-mode="dark"] .goal-item span {
+      color: #f3e8ff !important;
+    }
+    [data-mode="dark"] .ms-label,
+    [data-mode="dark"] .ms-bar-label,
+    [data-mode="dark"] .week-info .w-meta,
+    [data-mode="dark"] .month-card .m-label,
+    [data-mode="dark"] .month-card .m-meta,
+    [data-mode="dark"] .week-pip .wp-label,
+    [data-mode="dark"] .week-strip-label,
+    [data-mode="dark"] .toast-msg,
+    [data-mode="dark"] .credits,
+    [data-mode="dark"] .theme-picker-label,
+    [data-mode="dark"] #week-meta {
+      color: #c4b5fd !important;
+      opacity: 1;
+    }
+    [data-mode="dark"] .ms-message {
+      background: rgba(var(--c-500-rgb), 0.12) !important;
+      color: #ede9fe !important;
+      border-color: rgba(var(--c-500-rgb), 0.25) !important;
+    }
+
+    /* Pips, cards, icons */
+    [data-mode="dark"] .week-pip,
+    [data-mode="dark"] .month-card {
+      background: rgba(40, 28, 60, 0.7) !important;
+      border-color: rgba(var(--c-500-rgb), 0.25) !important;
+    }
+    [data-mode="dark"] .week-pip .wp-bar,
+    [data-mode="dark"] .month-card .m-bar,
+    [data-mode="dark"] .goals-bar {
+      background: rgba(255,255,255,0.08) !important;
+    }
+    [data-mode="dark"] .week-icon {
+      background: rgba(var(--c-500-rgb), 0.18) !important;
+      color: #f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.4) !important;
+    }
+    [data-mode="dark"] .week-info .w-bar,
+    [data-mode="dark"] .progress-bar:not(.hero .progress-bar),
+    [data-mode="dark"] .ms-progress-bar {
+      background: rgba(255,255,255,0.08) !important;
+    }
+
+    /* Buttons / form elements */
+    [data-mode="dark"] .btn-nav {
+      background: rgba(40, 28, 60, 0.75) !important;
+      color: #f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .btn-nav:hover:not(:disabled) {
+      background: rgba(var(--c-500-rgb), 0.2) !important;
+      border-color: var(--c-400) !important;
+    }
+    [data-mode="dark"] .week-select {
+      background: rgba(40, 28, 60, 0.85) !important;
+      color: #f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .goals-stat {
+      background: rgba(40, 28, 60, 0.85) !important;
+      color: #f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .toast-btn {
+      background: rgba(40, 28, 60, 0.85) !important;
+      color: #f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .toast-btn:hover { background: rgba(var(--c-500-rgb), 0.2) !important; }
+    [data-mode="dark"] .toast-btn.danger {
+      background: linear-gradient(135deg, var(--c-600), var(--a-500)) !important;
+      color: #fff !important;
+    }
+
+    /* Checkboxes */
+    [data-mode="dark"] .task-item input[type=checkbox],
+    [data-mode="dark"] .goal-item input[type=checkbox] {
+      background: rgba(255,255,255,0.05) !important;
+      border-color: var(--c-400) !important;
+    }
+    [data-mode="dark"] .task-item label:hover,
+    [data-mode="dark"] .goal-item label:hover {
+      background: rgba(255,255,255,0.04) !important;
+    }
+    [data-mode="dark"] .task-item.done label {
+      background: linear-gradient(135deg, rgba(var(--c-500-rgb),0.12), rgba(var(--a-500-rgb),0.1)) !important;
+    }
+    [data-mode="dark"] .task-item.done label span,
+    [data-mode="dark"] .goal-item.done label span {
+      opacity: .55;
+    }
+
+    /* Chips remain colored on dark */
+    [data-mode="dark"] .chip { background: rgba(255,255,255,0.06); color:#cbd5e1; }
+    [data-mode="dark"] .chip-learning   { color:#c4b5fd; }
+    [data-mode="dark"] .chip-habit      { color:#5eead4; }
+    [data-mode="dark"] .chip-networking { color:#f9a8d4; }
+    [data-mode="dark"] .chip-event      { color:#fbbf24; }
+
+    /* Mode picker buttons in dark */
+    [data-mode="dark"] .mode-btn { color: #e9d5ff; }
+    [data-mode="dark"] .mode-btn.active {
+      background: rgba(var(--c-500-rgb), 0.22) !important;
+      border-color: var(--c-400) !important;
+    }
+    [data-mode="dark"] .swatch-btn.active { border-color: var(--c-400) !important; }
+
+    /* Skip link in dark */
+    [data-mode="dark"] .skip-link { background: var(--c-700); }
+
+    /* ── Scroll-to-top FAB ────────────────────────────────────────── */
+    .fab {
+      position:fixed;
+      right:18px; bottom:18px;
+      width:46px; height:46px;
+      border-radius:99px;
+      background: linear-gradient(135deg, var(--c-700), var(--a-500));
+      color:#fff;
+      font-size:1.25rem; font-weight:600;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      box-shadow: 0 8px 18px -6px rgba(var(--c-700-rgb), 0.32);
+      z-index:50;
+      opacity:0;
+      transform: translateY(20px) scale(0.85);
+      pointer-events:none;
+      transition: all .25s cubic-bezier(.4,0,.2,1);
+      border:none;
+    }
+    .fab.visible { opacity:1; transform: translateY(0) scale(1); pointer-events:auto; }
+    .fab:hover { transform: translateY(-3px) scale(1.05); }
+
+    /* ── Toast (custom confirm) ───────────────────────────────────── */
+    .toast-overlay {
+      position:fixed; inset:0;
+      background: rgba(46,16,101,0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display:none;
+      align-items:center; justify-content:center;
+      z-index:100;
+      padding:20px;
+    }
+    .toast-overlay.visible { display:flex; }
+    .toast-box {
+      background:#fff;
+      border-radius:18px;
+      padding:24px 22px;
+      max-width:340px; width:100%;
+      box-shadow: 0 18px 44px -12px rgba(var(--c-700-rgb), 0.30);
+      border:1px solid var(--c-200);
+      animation: toastIn .25s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes toastIn { from { opacity:0; transform: scale(0.92) translateY(20px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .toast-title { font-size:1.05rem; font-weight:700; color: var(--c-900); margin-bottom:6px; }
+    .toast-msg   { font-size:.875rem; color: var(--c-800); opacity:.85; line-height:1.5; }
+    .toast-buttons { display:flex; gap:10px; margin-top:18px; }
+    .toast-btn {
+      flex:1; padding:11px 14px;
+      border-radius:12px;
+      font-weight:700; font-size:.875rem;
+      cursor:pointer;
+      border:1.5px solid var(--c-200);
+      background:#fff;
+      color: var(--c-800);
+      transition: all .15s;
+    }
+    .toast-btn:hover { background: var(--c-50); }
+    .toast-btn.danger {
+      background: linear-gradient(135deg, var(--c-700), var(--a-500));
+      color:#fff; border-color: transparent;
+    }
+    .toast-btn.danger:hover { transform: translateY(-1px); box-shadow: 0 6px 14px -4px rgba(var(--c-700-rgb), 0.4); }
+
+    /* ── Credits ──────────────────────────────────────────────────── */
+    .credits {
+      text-align:center;
+      font-size:.75rem;
+      color: var(--c-800);
+      opacity:.85;
+      line-height:1.6;
+      margin-top:10px;
+      padding: 0 16px;
+    }
+    .credits strong { color: var(--c-900); font-weight:700; }
+
+    /* ── Accessibility: keyboard focus rings ──────────────────────── */
+    button:focus-visible,
+    select:focus-visible,
+    .week-header:focus-visible,
+    .goals-header:focus-visible,
+    input[type=checkbox]:focus-visible {
+      outline: 3px solid var(--c-700);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+    .week-card.expanded:focus-within { outline: 2px solid var(--c-500); outline-offset: -2px; }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position:absolute; top:-100px; left:8px;
+      background: var(--c-900); color:#fff;
+      padding:8px 14px; border-radius:8px;
+      font-weight:700; font-size:.85rem;
+      z-index:200; transition: top .2s;
+    }
+    .skip-link:focus { top:8px; outline:none; }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* High-contrast mode (Windows / forced colors) */
+    @media (forced-colors: active) {
+      .card, .week-card, .month-summary, .goals-card, .toast-box, .theme-picker {
+        border: 1px solid CanvasText;
+      }
+      .swatch-btn.active { outline: 3px solid CanvasText; }
+    }
+
+    /* ── Rank badge (in hero, next to %) ──────────────────────────── */
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      padding: 4px 11px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .rank-badge.hidden { display: none; }
+    .streak-badge { margin-top:4px; }
+
+    /* ── Greeting (above hero title) ──────────────────────────────── */
+    .hero-greeting {
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      opacity:.85;
+      margin-bottom:6px;
+      line-height: 1.35;
+      max-width: 100%;
+    }
+
+    /* ── Monthly note card ─────────────────────────────────────────── */
+    .note-card {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border: 1px solid rgba(var(--c-500-rgb), 0.16);
+      border-radius:18px;
+      margin-bottom:16px;
+      overflow:hidden;
+      position:relative;
+    }
+    /* (gradient strip removed for cleaner look) */
+    .note-header {
+      display:flex; align-items:center; gap:12px;
+      padding:14px 18px 14px 22px;
+      cursor:pointer; user-select:none;
+    }
+    .note-header h3 {
+      flex:1;
+      font-weight:700; color: var(--c-800); font-size:.92rem;
+      display:flex; align-items:center; gap:8px;
+    }
+    .note-toggle {
+      color: var(--c-500); font-weight:800;
+      transition: transform .25s ease;
+    }
+    .note-card.expanded .note-toggle { transform: rotate(180deg); }
+    .note-body {
+      max-height:0; overflow:hidden;
+      transition: max-height .35s ease;
+    }
+    .note-card.expanded .note-body { max-height: 600px; }
+    .note-body-inner {
+      padding: 4px 22px 20px 22px;
+      font-size:.92rem; color: var(--c-900);
+      line-height:1.7; font-style:italic;
+    }
+    .note-body-inner::before { content: "\201C "; opacity:.5; font-style:normal; }
+    .note-body-inner::after  { content: " \201D"; opacity:.5; font-style:normal; }
+
+    /* ── Milestone celebration overlay ─────────────────────────────── */
+    .milestone-overlay {
+      position:fixed; inset:0;
+      background: rgba(46,16,101,0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display:none;
+      align-items:center; justify-content:center;
+      z-index:200;
+      padding:20px;
+    }
+    .milestone-overlay.visible { display:flex; }
+    .milestone-card {
+      background:#fff;
+      border-radius:18px;
+      padding:32px 28px;
+      max-width:380px; width:100%;
+      text-align:center;
+      box-shadow: 0 20px 48px -12px rgba(var(--c-700-rgb), 0.32);
+      border:1px solid var(--c-200);
+      animation: msIn .4s cubic-bezier(.34,1.56,.64,1);
+      position:relative;
+      overflow:hidden;
+    }
+    @keyframes msIn { from { opacity:0; transform: scale(0.7) translateY(40px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .milestone-emoji { font-size:3.5rem; margin-bottom:6px; line-height:1; }
+    .milestone-pct {
+      font-size:2.5rem; font-weight:800;
+      background: linear-gradient(135deg, var(--c-700), var(--a-500));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      letter-spacing:-.02em; line-height:1.1;
+      margin-bottom:6px;
+    }
+    .milestone-title {
+      font-size:1.1rem; font-weight:700; color: var(--c-900);
+      margin-bottom:10px;
+    }
+    .milestone-msg {
+      font-size:.9rem; color: var(--c-800); opacity:.9;
+      line-height:1.5;
+    }
+    .milestone-dismiss {
+      margin-top:18px;
+      padding:10px 22px;
+      border-radius:99px;
+      background: linear-gradient(135deg, var(--c-700), var(--a-500));
+      color:#fff;
+      font-weight:700; font-size:.85rem;
+      border:none; cursor:pointer;
+      box-shadow: 0 6px 18px -4px rgba(var(--c-700-rgb), 0.45);
+    }
+    .milestone-dismiss:hover { transform: translateY(-1px); }
+
+    /* Confetti */
+    .confetti-piece {
+      position:fixed;
+      top:-20px;
+      width:10px; height:14px;
+      pointer-events:none;
+      z-index:201;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity:1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
+    }
+
+    /* Dark-mode adjustments for new pieces */
+    [data-mode="dark"] .note-card {
+      background: linear-gradient(135deg, rgba(30,22,48,0.92), rgba(45,25,55,0.92)) !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .note-header h3 { color: #f3e8ff !important; }
+    [data-mode="dark"] .note-body-inner { color: #d8b4fe !important; }
+    [data-mode="dark"] .milestone-card {
+      background: rgba(28, 22, 44, 0.97) !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .milestone-title { color: #f3e8ff !important; }
+    [data-mode="dark"] .milestone-msg   { color: #d8b4fe !important; }
+
+    /* ── v4: pace status (in hero) ─────────────────────────────────── */
+    .pace-status {
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.18);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px;
+      font-size:.72rem;
+    }
+    .pace-pill {
+      display:inline-flex; align-items:center;
+      padding:4px 10px;
+      background: rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.35);
+      border-radius:99px;
+      font-weight:600;
+      font-size:.7rem;
+      letter-spacing:.04em;
+    }
+    .pace-btn, .pace-btn-small {
+      background:transparent; color:inherit;
+      border:1px dashed rgba(255,255,255,0.5);
+      border-radius:99px;
+      padding:4px 12px;
+      font-size:.7rem; font-weight:600;
+      cursor:pointer; opacity:.85;
+      transition: all .15s;
+    }
+    .pace-btn-small { padding:2px 9px; font-size:.85rem; line-height:1; opacity:.65; }
+    .pace-btn:hover, .pace-btn-small:hover { opacity:1; background:rgba(255,255,255,0.1); }
+
+    /* ── v4: week date range strip ─────────────────────────────────── */
+    .week-dates {
+      font-size:.72rem;
+      color: var(--t-mid);
+      font-weight:600;
+      letter-spacing:.04em;
+      padding: 0 0 12px 0;
+      margin-bottom:8px;
+      border-bottom: 1px dashed var(--c-200);
+    }
+    .week-dates strong { color: var(--c-700); }
+
+    /* current-week badge in week header */
+    .current-week-badge {
+      display:inline-block;
+      margin-left:8px;
+      padding:2px 8px;
+      background: linear-gradient(135deg, var(--c-700), var(--a-500));
+      color:#fff;
+      border-radius:99px;
+      font-size:.6rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.06em;
+      vertical-align:middle;
+    }
+    .week-card.is-current { border-color: var(--c-500) !important; }
+
+    /* ── v4: daily-habit 7-day grid ───────────────────────────────── */
+    .habit-task { padding: 10px 14px; }
+    .habit-row {
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .habit-text {
+      flex:1 1 100%;
+      font-size:.92rem; color: var(--c-900); font-weight:500;
+      line-height:1.4;
+      margin-bottom:4px;
+    }
+    .habit-grid {
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap:4px;
+      flex:1 1 auto;
+    }
+    .habit-day {
+      width:32px; height:32px;
+      border-radius:8px;
+      border:1.5px solid var(--c-200);
+      background:#fff;
+      color: var(--c-700);
+      font-weight:700; font-size:.72rem;
+      cursor:pointer;
+      transition: all .15s;
+      padding:0;
+      touch-action:manipulation;
+    }
+    .habit-day:hover { border-color: var(--c-400); transform: scale(1.05); }
+    .habit-day.on {
+      background: linear-gradient(135deg, var(--c-500), var(--a-500));
+      color:#fff;
+      border-color: var(--c-500);
+    }
+    .habit-count {
+      font-size:.78rem; font-weight:700;
+      color: var(--c-700);
+      min-width:32px; text-align:right;
+    }
+    .habit-task.done .habit-text {
+      text-decoration: line-through;
+      text-decoration-color: var(--c-400);
+      opacity:.6;
+    }
+    .habit-task.done .habit-count { color: var(--c-600); }
+
+    /* ── v4: numeric counters on tasks ─────────────────────────────── */
+    .task-counters {
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin: 6px 0 4px 46px;
+      padding: 0;
+    }
+    .counter {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:3px 4px;
+      border-radius:99px;
+      background: var(--c-50);
+      border:1px solid var(--c-200);
+    }
+    .counter-btn {
+      width:24px; height:24px;
+      border-radius:99px;
+      border:none;
+      background: var(--c-200);
+      color: var(--c-800);
+      font-weight:700; font-size:1rem;
+      cursor:pointer; line-height:1;
+      padding:0;
+      display:flex; align-items:center; justify-content:center;
+      touch-action:manipulation;
+      transition: background .15s;
+    }
+    .counter-btn:hover { background: var(--c-300); }
+    .counter-val {
+      font-size:.72rem; font-weight:700; color: var(--c-800);
+      letter-spacing:.04em;
+      min-width:64px; text-align:center;
+    }
+
+    /* ── v4: per-week notes ────────────────────────────────────────── */
+    .week-notes {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--c-200);
+    }
+    .week-notes label {
+      display:block;
+      font-size:.7rem; font-weight:700;
+      color: var(--t-mid);
+      text-transform:uppercase; letter-spacing:.08em;
+      margin-bottom:6px;
+    }
+    .week-notes textarea {
+      width:100%;
+      min-height:70px;
+      padding:10px 12px;
+      border:1px solid var(--c-200);
+      border-radius:10px;
+      font-family:inherit;
+      font-size:.875rem;
+      color: var(--c-900);
+      background:#fff;
+      resize:vertical;
+      transition: border-color .2s;
+    }
+    .week-notes textarea:focus {
+      outline:none;
+      border-color: var(--c-500);
+      box-shadow: 0 0 0 3px rgba(var(--c-500-rgb), 0.15);
+    }
+
+    /* ── v4: footer actions (export/import) ────────────────────────── */
+    .footer-actions {
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .footer-btn {
+      flex:1 1 auto;
+      padding:8px 12px;
+      border-radius:10px;
+      background: var(--c-50);
+      color: var(--c-800);
+      border: 1px solid var(--c-200);
+      font-size:.78rem; font-weight:600;
+      cursor:pointer; touch-action:manipulation;
+      transition: all .15s;
+    }
+    .footer-btn:hover {
+      background: var(--c-100);
+      border-color: var(--c-400);
+    }
+    .footer-btn-danger {
+      color:#9b2c2c;
+      border-color:#fed7d7;
+      background:#fff5f5;
+    }
+    .footer-btn-danger:hover {
+      background:#fed7d7;
+      border-color:#fc8181;
+      color:#742a2a;
+    }
+    [data-mode="dark"] .footer-btn-danger {
+      background: rgba(120, 30, 40, 0.25) !important;
+      border-color: rgba(220, 80, 100, 0.35) !important;
+      color: #fda4af !important;
+    }
+
+    /* Dark-mode adjustments for v4 pieces */
+    [data-mode="dark"] .week-dates { color:#c4b5fd; border-color: rgba(var(--c-500-rgb), 0.25); }
+    [data-mode="dark"] .week-dates strong { color:#f3e8ff; }
+    [data-mode="dark"] .habit-day {
+      background: rgba(40,28,60,0.7);
+      border-color: rgba(var(--c-500-rgb), 0.3);
+      color:#e9d5ff;
+    }
+    [data-mode="dark"] .habit-text { color:#f3e8ff !important; }
+    [data-mode="dark"] .habit-count { color:#c4b5fd !important; }
+    [data-mode="dark"] .counter {
+      background: rgba(40,28,60,0.7);
+      border-color: rgba(var(--c-500-rgb), 0.3);
+    }
+    [data-mode="dark"] .counter-btn {
+      background: rgba(255,255,255,0.08);
+      color:#f3e8ff;
+    }
+    [data-mode="dark"] .counter-val { color:#f3e8ff !important; }
+    [data-mode="dark"] .week-notes textarea {
+      background: rgba(28,22,44,0.85) !important;
+      color:#f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+    [data-mode="dark"] .week-notes label { color:#c4b5fd !important; }
+    [data-mode="dark"] .footer-btn {
+      background: rgba(40,28,60,0.7) !important;
+      color:#f3e8ff !important;
+      border-color: rgba(var(--c-500-rgb), 0.3) !important;
+    }
+
+    /* ── Mobile / accessibility tweaks ─────────────────────────────── */
+    html { overscroll-behavior-y: contain; }
+    body { hyphens: auto; -webkit-hyphens: auto; }
+    .task-item span, .goal-item span {
+      line-height: 1.5;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    button, label, .week-header, .goals-header, .swatch-btn, .map-toggle, .month-card, .week-pip, .week-dot, .fab, .toast-btn {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    @media(max-width: 640px) {
+      /* Icon-only Prev/Next buttons; let dropdown take the rest of the row */
+      #btn-prev, #btn-next {
+        flex: 0 0 auto !important;
+        padding: 10px 14px !important;
+        min-width: 46px;
+        font-size: 1rem;
+      }
+      #btn-prev .nav-text, #btn-next .nav-text { display: none; }
+      .week-select {
+        width: 100%;
+        min-width: 0;
+        text-overflow: ellipsis;
+      }
+    }
+    @media(max-width: 480px) {
+      .hero { padding: 18px !important; border-radius: 22px !important; }
+      .hero h1 { font-size: 1.5rem !important; }
+      .hero p { font-size: .8rem !important; }
+      #overall-pct { font-size: 2rem !important; }
+      body { padding-top: 12px !important; padding-bottom: 12px !important; }
+      .month-summary { padding: 18px !important; }
+      .month-summary .ms-pct { font-size: 1.9rem !important; }
+      .week-header { padding: 14px 14px !important; }
+      .goals-header { padding: 12px 14px 12px 18px !important; }
+      .swatch-btn { width: 32px; height: 32px; }
+    }
+    .sticky-nav {
+      top: 4px !important;
+      background: rgba(255,255,255,0.85) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    * { font-family:'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+    html, body { -webkit-font-smoothing:antialiased; }
+    body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, var(--c-100) 0%, transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, var(--a-bg-100) 0%, transparent 55%),
+        linear-gradient(180deg, var(--c-50) 0%, var(--c-50) 100%);
+      min-height:100vh;
+      color: var(--ink);
+    }
+
+    /* Glass / card */
+    .card {
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border:1px solid rgba(var(--c-500-rgb), 0.12);
+      border-radius:18px;
+      box-shadow: 0 8px 24px -10px rgba(var(--c-700-rgb), 0.10), 0 2px 6px -2px rgba(var(--c-700-rgb), 0.04);
+    }
+
+    /* Pro pass: hero stats row */
+    .hero-stats { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:flex-end; margin-top:6px; }
+    .streak-badge { margin-top:0 !important; }
+
+    /* Pro pass: subtle hover lift on collapsed cards */
+    .week-card:not(.expanded):hover,
+    .goals-card:not(.expanded):hover,
+    .note-card:not(.expanded):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -10px rgba(var(--c-700-rgb), 0.14);
+    }
+    .week-card, .goals-card, .note-card { transition: transform .18s ease, box-shadow .18s ease, border-color .2s; }
+
+    /* Hero header */
+    .hero {
+      background: linear-gradient(135deg, var(--c-700) 0%, var(--c-500) 100%);
+      color:#fff;
+      border-radius:22px !important;
+      box-shadow: 0 16px 36px -16px rgba(var(--c-700-rgb), 0.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(400px 200px at 90% 0%, rgba(255,255,255,0.25), transparent 60%),
+        radial-gradient(300px 150px at 0% 100%, rgba(var(--a-500-rgb), 0.45), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-content { position:relative; z-index:1; }
+
+    /* Chips — neutral background, colored dot + text */
+    .chip { display:inline-flex; align-items:center; gap:7px; padding:4px 11px; border-radius:999px; font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; background:#f1f5f9; color:#475569; }
+    .chip::before { content:""; width:6px; height:6px; border-radius:999px; background:currentColor; opacity:.95; }
+    .chip-learning   { color:#6d28d9; }
+    .chip-habit      { color:#0f766e; }
+    .chip-networking { color:#be185d; }
+    .chip-event      { color:#b45309; }
+
+    /* Progress bar */
+    .progress-bar { height:10px; border-radius:999px; background:var(--bg-soft); overflow:hidden; box-shadow: inset 0 1px 2px rgba(var(--c-700-rgb), 0.15); }
+    .progress-fill {
+      height:100%; border-radius:999px;
+      background: linear-gradient(90deg,var(--c-500) 0%,var(--a-500) 100%);
+      transition:width .6s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* Task rows */
+    .task-item { transition: transform .15s ease; }
+    .task-item label {
+      display:flex; align-items:flex-start; gap:14px; cursor:pointer;
+      padding:14px 16px; border-radius:12px;
+      transition: all .2s ease;
+      border:1px solid transparent;
+    }
+    .task-item label:hover {
+      background:var(--c-50);
+      border-color:var(--c-200);
+      transform: translateX(2px);
+    }
+    .task-item input[type=checkbox] {
+      appearance:none; -webkit-appearance:none;
+      width:22px; height:22px; min-width:22px;
+      border-radius:7px;
+      border:2px solid var(--c-300);
+      background:#fff;
+      cursor:pointer;
+      margin-top:1px;
+      position:relative;
+      transition: all .2s ease;
+    }
+    .task-item input[type=checkbox]:hover { border-color:var(--c-500); }
+    .task-item input[type=checkbox]:checked {
+      background: linear-gradient(135deg,var(--c-500),var(--a-500));
+      border-color:var(--c-500);
+    }
+    .task-item input[type=checkbox]:checked::after {
+      content:""; position:absolute;
+      left:6px; top:2px;
+      width:6px; height:11px;
+      border:solid #fff;
+      border-width:0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .task-item.done label {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border-color:var(--c-200);
+    }
+    .task-item.done label span {
+      text-decoration:line-through;
+      text-decoration-color:var(--c-400);
+      text-decoration-thickness:2px;
+      opacity:.55;
+    }
+
+    /* Buttons */
+    .btn-nav {
+      background:#fff;
+      border:1px solid var(--c-200);
+      color:var(--c-700);
+      font-weight:600;
+      padding:10px 16px;
+      border-radius:10px;
+      transition: all .2s ease;
+      min-height:46px;
+      touch-action:manipulation;
+      box-shadow: 0 1px 2px rgba(var(--c-700-rgb), 0.04);
+    }
+    .btn-nav:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--c-100) 0%, var(--bg-extra) 100%);
+      border-color:var(--c-400);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px -4px rgba(var(--c-500-rgb), 0.16);
+    }
+    .btn-nav:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* Dropdown */
+    .week-select {
+      width:100%;
+      border:1px solid var(--c-200);
+      border-radius:10px;
+      padding:10px 14px;
+      font-size:.95rem;
+      font-weight:600;
+      color:var(--c-900);
+      background:#fff;
+      cursor:pointer;
+      min-height:46px;
+      transition: all .2s ease;
+    }
+    .week-select:hover { border-color:var(--c-400); }
+    .week-select:focus { outline:none; border-color:var(--c-500); box-shadow: 0 0 0 4px rgba(var(--c-500-rgb), 0.15); }
+
+    /* Goals panel */
+    .goals-panel {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border:1.5px solid var(--c-200);
+      border-radius:18px;
+      padding:18px 20px;
+      margin-bottom:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .goals-panel::before {
+      content:""; position:absolute; top:0; left:0; bottom:0;
+      width:4px;
+      background: linear-gradient(180deg, var(--c-500), var(--a-500));
+    }
+    .goals-panel h3 {
+      font-weight:800; color:var(--c-800);
+      margin-bottom:10px;
+      display:flex; align-items:center; justify-content:space-between;
+      cursor:pointer;
+      font-size:.95rem;
+      letter-spacing:.01em;
+    }
+    .goals-list { padding:0; margin:0; list-style:none; }
+    .goals-list li {
+      font-size:.875rem; color:var(--c-900);
+      padding:5px 0 5px 20px;
+      position:relative;
+      line-height:1.5;
+    }
+    .goals-list li::before {
+      content:""; position:absolute; left:4px; top:11px;
+      width:6px; height:6px; border-radius:999px;
+      background: linear-gradient(135deg,var(--c-500),var(--a-500));
+    }
+
+    /* Category group */
+    .category-group { margin-bottom:24px; }
+    .category-group:last-child { margin-bottom:0; }
+    .category-group h3 { margin-bottom:10px; padding-left:2px; }
+
+    /* Dropdown options */
+    .week-option-done    { color:#059669; font-weight:700; }
+    .week-option-partial { color:var(--t-mid); font-weight:600; }
+
+    /* Reset link */
+    .reset-link {
+      color:var(--c-500); font-size:.75rem; font-weight:600;
+      transition: color .15s; touch-action:manipulation;
+    }
+    .reset-link:hover { color:var(--a-500); }
+
+    /* Pct number */
+    .pct-num {
+      background: linear-gradient(135deg,#fff,var(--bg-extra));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    /* Sticky nav */
+    .sticky-nav {
+      position:sticky; top:8px; z-index:10;
+    }
+
+    /* Celebrate animation */
+    /* (rainbow shimmer celebration removed — milestones modal handles celebration now) */
+
+    /* Completion banner */
+    .completion-banner {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border:1.5px solid var(--c-200);
+      border-radius:18px;
+    }
+
+    /* Progress Map */
+    .map-toggle {
+      display:flex; align-items:center; justify-content:space-between;
+      width:100%; cursor:pointer;
+      padding:14px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(250,245,255,0.85));
+      border:1px solid rgba(var(--c-500-rgb), 0.18);
+      border-radius:18px;
+      transition:all .2s ease;
+    }
+    .map-toggle:hover { border-color:var(--c-400); background:linear-gradient(135deg,#fff,var(--c-50)); }
+    .map-toggle h3 { font-weight:700; color:var(--c-800); font-size:.95rem; }
+    .map-toggle .stat { font-size:.7rem; color:var(--t-mid); opacity:.75; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+
+    .map-body {
+      max-height:0; overflow:hidden;
+      transition: max-height .35s ease;
+    }
+    .map-body.open { max-height: 1200px; }
+
+    .map-inner {
+      padding:18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(250,245,255,0.7));
+      border:1px solid rgba(var(--c-500-rgb), 0.12);
+      border-top:none;
+      border-radius:0 0 18px 18px;
+      margin-top:-12px;
+      padding-top:24px;
+    }
+
+    .month-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap:10px;
+    }
+    .month-card {
+      background:#fff;
+      border:1px solid var(--c-200);
+      border-radius:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      transition: all .2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .month-card:hover {
+      transform: translateY(-2px);
+      border-color:var(--c-500);
+      box-shadow: 0 8px 18px -6px rgba(var(--c-500-rgb), 0.35);
+    }
+    .month-card.current {
+      border-color:var(--c-500);
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      box-shadow: 0 0 0 3px rgba(var(--c-500-rgb), 0.15);
+    }
+    .month-card.complete {
+      background: linear-gradient(135deg, var(--bg-soft) 0%, var(--a-bg-100) 100%);
+      border-color:var(--c-500);
+    }
+    .month-card .m-label { font-size:.65rem; font-weight:700; color:var(--t-mid); text-transform:uppercase; letter-spacing:.05em; }
+    .month-card .m-pct { font-size:1.25rem; font-weight:700; color:var(--c-900); line-height:1.1; margin-top:2px; }
+    .month-card .m-meta { font-size:.7rem; color:var(--c-600); opacity:.75; font-weight:600; margin-top:1px; }
+    .month-card .m-bar { height:4px; background:var(--bg-soft); border-radius:99px; overflow:hidden; margin-top:8px; }
+    .month-card .m-fill { height:100%; background:linear-gradient(90deg,var(--c-500),var(--a-500)); border-radius:99px; transition:width .5s; }
+
+    .week-strip-section {
+      margin-top:18px;
+      padding-top:18px;
+      border-top:1px dashed var(--c-200);
+    }
+    .week-strip-label {
+      font-size:.65rem; font-weight:700; color:var(--t-mid);
+      text-transform:uppercase; letter-spacing:.08em;
+      margin-bottom:10px; opacity:.8;
+    }
+    .week-strip {
+      display:grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap:3px;
+    }
+    .week-month {
+      display:flex; flex-direction:column; gap:3px;
+    }
+    .week-dot {
+      aspect-ratio:1;
+      border-radius:5px;
+      cursor:pointer;
+      background:var(--c-100);
+      border:1.5px solid transparent;
+      transition: all .15s ease;
+      position:relative;
+    }
+    .week-dot:hover {
+      transform: scale(1.25);
+      z-index:2;
+      border-color:var(--c-700);
+    }
+    .week-dot.partial { background: linear-gradient(135deg, var(--c-300), var(--c-300)); }
+    .week-dot.complete { background: linear-gradient(135deg, var(--c-500), var(--a-500)); box-shadow: 0 1px 4px rgba(var(--c-500-rgb), 0.4); }
+    .week-dot.current {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--c-500);
+    }
+    .week-dot::after {
+      content: attr(data-tooltip);
+      position:absolute;
+      bottom: calc(100% + 6px);
+      left:50%;
+      transform: translateX(-50%);
+      background:var(--c-900);
+      color:#fff;
+      font-size:.7rem; font-weight:600;
+      padding:4px 8px;
+      border-radius:6px;
+      white-space:nowrap;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .15s;
+      z-index:3;
+    }
+    .week-dot:hover::after { opacity:1; }
+
+    .map-legend {
+      display:flex; gap:16px; flex-wrap:wrap;
+      margin-top:14px;
+      font-size:.7rem; color:var(--t-mid); opacity:.75; font-weight:600;
+    }
+    .map-legend span { display:inline-flex; align-items:center; gap:6px; }
+    .map-legend .swatch { width:12px; height:12px; border-radius:4px; }
+
+    /* ── v2 additions ──────────────────────────────────────────────────────── */
+
+    /* Month summary card */
+    .month-summary {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border:1px solid rgba(var(--c-500-rgb), 0.16);
+      border-radius:18px;
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .month-summary::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(90deg, var(--c-500), var(--a-500));
+      opacity:.7;
+    }
+    .month-summary .ms-label {
+      font-size:.7rem; font-weight:600; color:var(--t-mid);
+      text-transform:uppercase; letter-spacing:.1em;
+    }
+    .month-summary .ms-title {
+      font-size:1.55rem; font-weight:700; color:var(--c-900);
+      letter-spacing:-.015em; margin-top:2px;
+    }
+    .month-summary .ms-pct {
+      font-size:2.4rem; font-weight:800;
+      background: linear-gradient(135deg,var(--c-700),var(--a-500));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      line-height:1; letter-spacing:-.02em;
+    }
+    .ms-emoji { font-size:2rem; line-height:1; }
+
+    .ms-bar-label {
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:.78rem; font-weight:700; color:var(--c-800);
+      margin-top:14px; margin-bottom:6px;
+    }
+    .ms-bar-label .ms-meta {
+      font-size:.7rem; color:var(--c-600); opacity:.8; font-weight:600;
+    }
+    .ms-progress-bar {
+      height:12px; border-radius:99px;
+      background: rgba(var(--c-500-rgb), 0.12);
+      overflow:hidden;
+      box-shadow: inset 0 1px 2px rgba(var(--c-700-rgb), 0.1);
+    }
+    .ms-progress-fill {
+      height:100%; border-radius:99px;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .ms-fill-goals { background: linear-gradient(90deg,var(--c-500),var(--c-400)); }
+    .ms-fill-tasks { background: linear-gradient(90deg,var(--c-400),var(--a-500)); }
+
+    .ms-message {
+      margin-top:14px;
+      padding:10px 14px;
+      background: rgba(255,255,255,0.7);
+      border-radius:12px;
+      font-size:.85rem; color:var(--c-800);
+      font-weight:500;
+      text-align:center;
+      border:1px solid rgba(var(--c-500-rgb), 0.12);
+    }
+
+    /* Week mini-dots in month summary */
+    .week-pips {
+      display:grid; grid-template-columns: repeat(4, 1fr); gap:8px;
+      margin-top:14px;
+    }
+    .week-pip {
+      background:#fff;
+      border:1.5px solid var(--c-200);
+      border-radius:12px;
+      padding:8px 6px;
+      text-align:center;
+      cursor:pointer;
+      transition: all .2s ease;
+    }
+    .week-pip:hover {
+      border-color:var(--c-500);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px -3px rgba(var(--c-500-rgb), 0.3);
+    }
+    .week-pip .wp-label { font-size:.6rem; font-weight:700; color:var(--t-mid); text-transform:uppercase; letter-spacing:.06em; }
+    .week-pip .wp-pct { font-size:.95rem; font-weight:700; color:var(--c-900); line-height:1.1; margin-top:2px; }
+    .week-pip .wp-bar { height:3px; background:var(--bg-soft); border-radius:99px; margin-top:5px; overflow:hidden; }
+    .week-pip .wp-fill { height:100%; background:linear-gradient(90deg,var(--c-500),var(--a-500)); border-radius:99px; transition: width .5s; }
+    .week-pip.complete { background: linear-gradient(135deg,var(--bg-soft),var(--a-bg-100)); border-color:var(--c-500); }
+    .week-pip.complete .wp-pct { color:var(--c-700); }
+
+    /* Week accordion cards */
+    .week-card {
+      background: rgba(255,255,255,0.85);
+      border:1px solid rgba(var(--c-500-rgb), 0.14);
+      border-radius:18px;
+      margin-bottom:12px;
+      overflow:hidden;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .week-card.expanded {
+      border-color:var(--c-500);
+      box-shadow: 0 10px 24px -10px rgba(var(--c-500-rgb), 0.18);
+    }
+    .week-card.complete {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border-color: rgba(var(--c-500-rgb), 0.3);
+    }
+
+    .week-header {
+      display:flex; align-items:center; gap:14px;
+      padding:16px 18px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: rgba(var(--c-500-rgb), 0.1);
+    }
+    .week-header:hover { background: rgba(250,245,255,0.5); }
+
+    .week-icon {
+      flex-shrink:0;
+      width:38px; height:38px;
+      border-radius:12px;
+      background:var(--c-100);
+      color:var(--c-700);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:.95rem;
+      border:1.5px solid var(--c-200);
+    }
+    .week-card.complete .week-icon {
+      background: linear-gradient(135deg,var(--c-500),var(--a-500));
+      color:#fff; border-color:var(--c-500);
+    }
+
+    .week-info { flex:1; min-width:0; }
+    .week-info .w-title {
+      font-weight:700; color:var(--c-900); font-size:.95rem;
+      display:flex; align-items:center; gap:8px;
+    }
+    .week-info .w-emoji { font-size:1rem; }
+    .week-info .w-bar {
+      height:5px; background:var(--bg-soft); border-radius:99px;
+      margin-top:6px; overflow:hidden;
+    }
+    .week-info .w-fill {
+      height:100%; border-radius:99px;
+      background: linear-gradient(90deg,var(--c-500),var(--a-500));
+      transition: width .5s;
+    }
+    .week-info .w-meta {
+      font-size:.72rem; color:var(--t-mid); opacity:.8; font-weight:600;
+      margin-top:3px;
+    }
+
+    .week-toggle {
+      flex-shrink:0;
+      color:var(--c-500); font-weight:800; font-size:1rem;
+      transition: transform .25s ease;
+    }
+    .week-card.expanded .week-toggle { transform: rotate(180deg); }
+
+    .week-body {
+      max-height:0; overflow:hidden;
+      transition: max-height .35s ease;
+    }
+    .week-card.expanded .week-body { max-height: 5000px; }
+
+    .week-body-inner {
+      padding: 0 18px 18px 18px;
+      border-top:1px dashed rgba(var(--c-500-rgb), 0.15);
+      padding-top:16px;
+      margin-top:4px;
+    }
+
+    /* Monthly goals (v2 — checkable) */
+    .goals-card {
+      background: linear-gradient(135deg, var(--c-50) 0%, var(--a-bg-50) 100%);
+      border:1px solid rgba(var(--c-500-rgb), 0.16);
+      border-radius:18px;
+      margin-bottom:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    /* (gradient strip removed for cleaner look) */
+    .goals-header {
+      display:flex; align-items:center; gap:14px;
+      padding:14px 18px 14px 22px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .goals-header h3 {
+      flex:1;
+      font-weight:700; color:var(--c-800); font-size:.95rem;
+      display:flex; align-items:center; gap:8px;
+    }
+    .goals-stat {
+      font-size:.75rem; font-weight:700; color:var(--c-700);
+      padding:3px 10px;
+      background:#fff;
+      border:1px solid var(--c-200);
+      border-radius:99px;
+    }
+    .goals-toggle {
+      color:var(--c-500); font-weight:800;
+      transition: transform .25s ease;
+    }
+    .goals-card.expanded .goals-toggle { transform: rotate(180deg); }
+
+    .goals-body {
+      max-height:0; overflow:hidden;
+      transition: max-height .35s ease;
+    }
+    .goals-card.expanded .goals-body { max-height: 2000px; }
+
+    .goals-body-inner {
+      padding: 4px 18px 18px 22px;
+    }
+    .goals-bar {
+      height:6px; background:rgba(var(--c-500-rgb), 0.15); border-radius:99px;
+      margin-bottom:14px; overflow:hidden;
+    }
+    .goals-fill {
+      height:100%; background:linear-gradient(90deg,var(--c-500),var(--a-500));
+      border-radius:99px; transition: width .5s;
+    }
+    .goal-item label {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:8px 10px;
+      border-radius:12px;
+      cursor:pointer;
+      transition: background .15s;
+    }
+    .goal-item label:hover { background: rgba(255,255,255,0.6); }
+    .goal-item input[type=checkbox] {
+      appearance:none; -webkit-appearance:none;
+      width:20px; height:20px; min-width:20px;
+      border-radius:6px;
+      border:2px solid var(--c-300);
+      background:#fff;
+      cursor:pointer;
+      margin-top:1px;
+      position:relative;
+      transition: all .2s ease;
+      flex-shrink:0;
+    }
+    .goal-item input[type=checkbox]:checked {
+      background: linear-gradient(135deg,var(--c-500),var(--a-500));
+      border-color:var(--c-500);
+    }
+    .goal-item input[type=checkbox]:checked::after {
+      content:""; position:absolute;
+      left:5px; top:1px;
+      width:5px; height:10px;
+      border:solid #fff;
+      border-width:0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .goal-item.done label span {
+      text-decoration: line-through;
+      text-decoration-color:var(--c-400);
+      text-decoration-thickness:2px;
+      opacity:.55;
+    }
+    .goal-item span {
+      font-size:.875rem; color:var(--c-900); line-height:1.5; font-weight:500;
+    }
+
+    @media(max-width:640px) {
+      #btn-prev, #btn-next { flex:1; padding:10px 12px; font-size:.875rem; }
+      .hero h1 { font-size:1.5rem; }
+      .month-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap:8px; }
+      .week-strip { gap:2px; }
+      .month-summary .ms-pct { font-size:2.1rem; }
+      .week-pip .wp-pct { font-size:.85rem; }
+    }
+  </style>
+</head>
+<body class="min-h-screen py-5 px-3">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="max-w-2xl mx-auto">
+
+  <!-- Hero Header -->
+  <div id="app-header" class="hero rounded-3xl p-6 mb-5">
+    <div class="hero-content">
+      <div class="flex items-start justify-between mb-2">
+        <div>
+          <div id="hero-greeting" class="hero-greeting">Welcome</div>
+          <h1 class="text-3xl leading-tight" style="font-weight:800;">Your Journey</h1>
+          <p class="text-sm opacity-90 mt-1">One month at a time, one win at a time.</p>
+        </div>
+        <div class="text-right">
+          <div id="overall-pct" class="pct-num text-4xl">0%</div>
+          <p class="text-xs uppercase tracking-wider opacity-80 mt-1">complete</p>
+          <div class="hero-stats">
+            <div id="rank-badge" class="rank-badge hidden">🦅 Eagle</div>
+            <div id="streak-badge" class="rank-badge hidden" title="Consecutive-day streak">🔥 1</div>
+          </div>
+        </div>
+      </div>
+      <div class="progress-bar mt-4" style="background:rgba(255,255,255,0.25);">
+        <div id="overall-fill" class="progress-fill" style="width:0%; background:linear-gradient(90deg,#fff,var(--bg-extra),var(--a-300));"></div>
+      </div>
+      <div class="flex justify-between text-xs opacity-90 mt-2 font-medium">
+        <span id="tasks-done-label">0 of 0 items</span>
+        <span id="months-done-label">0 of 13 months complete</span>
+      </div>
+      <div id="pace-status" class="pace-status"></div>
+    </div>
+  </div>
+
+  <!-- Month Nav -->
+  <div id="main-content" class="card rounded-2xl p-4 mb-5 sticky-nav">
+    <div class="flex items-center gap-2">
+      <button id="btn-prev" onclick="navigateMonth(-1)" class="btn-nav text-sm" aria-label="Previous month">
+        <span aria-hidden="true">←</span><span class="nav-text"> Prev</span>
+      </button>
+      <div class="flex-1 min-w-0">
+        <select id="month-dropdown" onchange="onMonthChange(this.value)" class="week-select" aria-label="Select month"></select>
+      </div>
+      <button id="btn-next" onclick="navigateMonth(1)" class="btn-nav text-sm" aria-label="Next month">
+        <span class="nav-text">Next </span><span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Monthly Reflection Note -->
+  <div id="note-card-wrap"></div>
+
+  <!-- Month Summary -->
+  <div id="month-summary" class="month-summary mb-5"></div>
+
+  <!-- Monthly Goals (collapsible, checkable) -->
+  <div id="goals-card-wrap"></div>
+
+  <!-- Weekly Tasks (4 collapsible cards) -->
+  <div id="weeks-container"></div>
+
+  <!-- Month Complete Banner -->
+  <div id="completion-banner" class="hidden completion-banner text-center py-8 px-6 mb-5">
+    <div class="text-6xl mb-3">🎉</div>
+    <h2 class="text-2xl font-extrabold mb-2" style="background:linear-gradient(135deg,var(--c-700),var(--a-500));-webkit-background-clip:text;background-clip:text;color:transparent;">Month Complete!</h2>
+    <p class="text-purple-700 text-sm font-medium opacity-80">Every goal and task checked off. Onward to the next month!</p>
+  </div>
+
+  <!-- Footer: last saved -->
+  <div class="card rounded-2xl p-3 text-center text-sm" style="color:var(--t-mid);">
+    <span id="last-saved-label" class="text-xs font-medium opacity-70">Not yet saved</span>
+  </div>
+
+  <!-- Theme Picker (moved to bottom) -->
+  <div class="theme-picker mt-4" role="group" aria-label="Color theme">
+    <span class="theme-picker-label">Color</span>
+    <button type="button" class="swatch-btn active" data-swatch="plum"   data-label="Plum"       onclick="setTheme('plum')"   aria-label="Plum theme"        aria-pressed="true"  title="Plum"></button>
+    <button type="button" class="swatch-btn"        data-swatch="ocean"  data-label="Ocean"      onclick="setTheme('ocean')"  aria-label="Ocean theme"       aria-pressed="false" title="Ocean"></button>
+    <button type="button" class="swatch-btn"        data-swatch="sunset" data-label="Sunset"     onclick="setTheme('sunset')" aria-label="Sunset theme"      aria-pressed="false" title="Sunset"></button>
+    <button type="button" class="swatch-btn"        data-swatch="forest" data-label="Forest"     onclick="setTheme('forest')" aria-label="Forest theme"      aria-pressed="false" title="Forest"></button>
+    <button type="button" class="swatch-btn"        data-swatch="slate"  data-label="Slate"      onclick="setTheme('slate')"  aria-label="Slate theme"       aria-pressed="false" title="Slate"></button>
+    <button type="button" class="swatch-btn"        data-swatch="cb"     data-label="Accessible" onclick="setTheme('cb')"     aria-label="Color-blind friendly theme" aria-pressed="false" title="Color-blind friendly"></button>
+  </div>
+
+  <!-- Mode Picker (light/dark/auto) -->
+  <div class="mode-picker" role="group" aria-label="Light or dark mode">
+    <button type="button" class="mode-btn active" data-mode="light" data-label="Light"  onclick="setMode('light')" aria-label="Light mode"  aria-pressed="true"  title="Light">☀️</button>
+    <button type="button" class="mode-btn"        data-mode="dark"  data-label="Dark"   onclick="setMode('dark')"  aria-label="Dark mode"   aria-pressed="false" title="Dark">🌙</button>
+    <button type="button" class="mode-btn"        data-mode="auto"  data-label="System" onclick="setMode('auto')"  aria-label="Match system" aria-pressed="false" title="System">💻</button>
+  </div>
+
+  <!-- Data tools: Export, Import, Reset -->
+  <div class="card rounded-2xl p-4 mt-5">
+    <div class="footer-actions">
+      <button type="button" class="footer-btn" onclick="exportBackup()" title="Download a JSON backup of your progress">⤓ Export Backup</button>
+      <button type="button" class="footer-btn" onclick="importBackupClick()" title="Restore from a JSON backup">⤒ Import Backup</button>
+      <button type="button" class="footer-btn footer-btn-danger" onclick="resetProgress()" title="Clear all progress (cannot be undone)">⟲ Reset Progress</button>
+      <input id="import-input" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(this.files[0]); this.value=''">
+    </div>
+  </div>
+
+  <p class="text-center text-xs mt-4 mb-2 font-medium" style="color: var(--c-700); opacity:.75;">Made with 💜 for Jackie by Mike Carrizales</p>
+
+  <p class="credits">
+    Training program designed by <strong>Jake and Jolene Carrithers</strong><br>
+    Last updated: <span id="last-updated-date">May 1, 2026</span>
+  </p>
+
+</div>
+
+<!-- Floating Scroll-to-Top Button -->
+<button id="fab-top" class="fab" onclick="scrollToTop()" aria-label="Scroll to top" title="Scroll to top">↑</button>
+
+<!-- Milestone celebration overlay -->
+<div id="milestone-overlay" class="milestone-overlay" onclick="dismissMilestone(event)">
+  <div class="milestone-card" onclick="event.stopPropagation()">
+    <div class="milestone-emoji" id="milestone-emoji">🎉</div>
+    <div class="milestone-pct" id="milestone-pct">25%</div>
+    <div class="milestone-title" id="milestone-title">First quarter done!</div>
+    <div class="milestone-msg" id="milestone-msg">You've laid the foundation.</div>
+    <button class="milestone-dismiss" onclick="dismissMilestone()">Keep going →</button>
+  </div>
+</div>
+
+<!-- Custom Confirm Toast -->
+<div id="toast-overlay" class="toast-overlay" onclick="dismissToast(event)">
+  <div class="toast-box" onclick="event.stopPropagation()">
+    <div class="toast-title" id="toast-title">Reset all progress?</div>
+    <div class="toast-msg" id="toast-msg">This will clear every checked task and goal. This cannot be undone.</div>
+    <div class="toast-buttons">
+      <button class="toast-btn" onclick="dismissToast()">Cancel</button>
+      <button class="toast-btn danger" id="toast-confirm-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const TRACKER_DATA = {
+  monthlyGoals: {
+    1: [
+      "150pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "1+ New Customer",
+      "4+ New Prospects added to your list",
+      "Showed 1+ Plan (with mentor, on your own, or Board Plan / WWG event)",
+      "Listened to 8+ Audios",
+      "Read 1+ Book — Recommendation: Simply Rich by Rich DeVos",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Scheduled Retail Event for next month",
+      "Sent 4+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    2: [
+      "150pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "1+ New Customer",
+      "5+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 2+ Plans (with mentor, on your own, or Board Plan / WWG event)",
+      "Listened to 8+ Audios",
+      "Read 1+ Book — Recommendation: True North by Georgia Lee Puryear",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Scheduled Health Break for Week 10",
+      "Sent 5+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    3: [
+      "150pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "1+ New Customer",
+      "6+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 2+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book — Recommendation: Magic of Thinking Big by David Schwartz",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Completed Health Break (Week 10)",
+      "Sent 6+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    4: [
+      "200pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "2+ New Customers",
+      "6+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 3+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book — Recommendation: Developing the Leader Within You by John Maxwell",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Created Customer Binder",
+      "Sent 6+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    5: [
+      "200pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "2+ New Customers",
+      "8+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 3+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book — Recommendation: Cashflow Quadrant by Robert Kiyosaki",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Scheduled Beauty Break for Week 21",
+      "Sent 7+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    6: [
+      "200pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "2+ New Customers",
+      "8+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 4+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Completed Beauty Break (Week 21)",
+      "Sent 8+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    7: [
+      "200pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "2+ New Customers",
+      "10+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 4+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Scheduled Begin 30 Event for Week 32",
+      "Sent 8+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    8: [
+      "250pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "10+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 5+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Completed Begin 30 Event (Week 32)",
+      "Sent 10+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    9: [
+      "250pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "12+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 5+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Sent 12+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    10: [
+      "250pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "12+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 6+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Achieved a Qualified Month",
+      "Sent 14+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    11: [
+      "250pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "15+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 6+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Created Vision / Dream Board",
+      "Sent 14+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    12: [
+      "300pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "15+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 8+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Scheduled Amway Home Retail Event for Week 50",
+      "Sent 16+ Topics to Coach every week with audio takeaways or questions"
+    ],
+    13: [
+      "300pv Minimum Personal Circle / 60% Verified Customer Sales (VCS)",
+      "3+ New Customers",
+      "15+ New Prospects added to your list",
+      "Add 1+ new product to your DITTO",
+      "Showed 8+ Plans",
+      "Listened to 8+ Audios",
+      "Read 1+ Book",
+      "Attended Team Meeting, WWG Event, 2+ Board Plans, Howie Livestream",
+      "Completed Amway Home Retail Event (Week 50)",
+      "Sent 16+ Topics to Coach every week",
+      "🎉 GREAT JOB! You finished the 52-Week Training. Now… do it again!"
+    ]
+  },
+  weeks: [
+    // ── MONTH 1 ──────────────────────────────────────────────────────────────
+    { week:1, month:1, tasks:[
+      {id:"w1_t1", cat:"learning",    text:'Listen: "Kenny and Ashlea Toms Diamond Seminar" — WWG App / wwdb.com › WWG Store › Search "1237"'},
+      {id:"w1_t2", cat:"learning",    text:'Watch: "Activating New IBOs" — championleadership1.com › Training Videos (Password: vision3)'},
+      {id:"w1_t3", cat:"learning",    text:'Watch: "Basics of the Business" — championleadership1.com › Training Videos (Password: vision3)'},
+      {id:"w1_t4", cat:"event",       text:"Place Amway Order — include Starter Stacks (first 30 days). Search 'Starter Stacks' in Amway App or amway.com"},
+      {id:"w1_t5", cat:"event",       text:"Create Your Make Aware — your personal story of how you found this industry. Send Topic to your coach with your story"},
+      {id:"w1_t6", cat:"event",       text:"Get added to Howie and Theresa's Topics and monthly Newsletter — ask your coach for the Topics numbers"},
+      {id:"w1_t7", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w1_t8", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w1_t9", cat:"habit",       text:"Send Topic to coach with your takeaways and a question"}
+    ]},
+    { week:2, month:1, tasks:[
+      {id:"w2_t1", cat:"learning",    text:'Listen: "Las Vegas Retail Panel 1, 2, 3, 4" — WWG App › WWG Store › Search "RTLPNL"'},
+      {id:"w2_t2", cat:"learning",    text:"Watch: Retail Shelf IBO Training — WWG App › Retail shelf › 'For IBOs' icon › Study Steps 1–6"},
+      {id:"w2_t3", cat:"learning",    text:'Understand $300 VCS Requirement, 60% VCS, CSI, and SSI — Reference "Money and Rewards Brochure" (WWG App › Info Center › PDFs › "Money" › Pages 3, 5–6)'},
+      {id:"w2_t4", cat:"event",       text:"Save your MyShop retail website to your phone home screen"},
+      {id:"w2_t5", cat:"networking",  text:"Register a customer using your MyShop retail website"},
+      {id:"w2_t6", cat:"event",       text:"Create a receipt for a customer sale"},
+      {id:"w2_t7", cat:"learning",    text:"Understand the upcoming contest (Diamond Day / Family Fun Day) — visit Danzik Motivation Newsletter for the flyer"},
+      {id:"w2_t8", cat:"networking",  text:"Practice your Make Aware with someone (friend, family, or stranger) and coach up on it"},
+      {id:"w2_t9", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w2_t10",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w2_t11",cat:"habit",       text:"Send Topic to coach with reflection on your Make Aware, takeaways, or questions"}
+    ]},
+    { week:3, month:1, tasks:[
+      {id:"w3_t1", cat:"learning",    text:'Listen: "Howie Danzik Wrap-Up" — WWG App › WWG Store › Search "1376"'},
+      {id:"w3_t2", cat:"learning",    text:'Watch: "Retailing Tips" — championleadership1.com › Training Videos (Password: vision3)'},
+      {id:"w3_t3", cat:"learning",    text:'Watch: "Customer Sales Incentive (CSI)" — Amway App / amway.com › Education › Search "Customer Sales Incentive"'},
+      {id:"w3_t4", cat:"event",       text:'Create your Client and Prospect List — Reference "Building Your Name List" (WWG App › Info Center › PDFs › "Building")'},
+      {id:"w3_t5", cat:"event",       text:"Schedule a Retail Event (virtual or live, with mentor or on your own, one-on-one or group)"},
+      {id:"w3_t6", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w3_t7", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w3_t8", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:4, month:1, tasks:[
+      {id:"w4_t1", cat:"learning",    text:'Listen: "Spring Leadership 2013 — Build Your Width" — WWG App › WWG Store › Search "724"'},
+      {id:"w4_t2", cat:"learning",    text:'Watch: "What Differentiates Amway" — championleadership1.com › Training Videos'},
+      {id:"w4_t3", cat:"learning",    text:"Learn about DITTO (auto-reorder) — watch the DITTO video and reference the DITTO PDFs in the WWG App"},
+      {id:"w4_t4", cat:"event",       text:"Set up your DITTO (auto-reorder) with at least one Amway product"},
+      {id:"w4_t5", cat:"networking",  text:"Practice Interjections: say 'Hi' to everyone you encounter this week"},
+      {id:"w4_t6", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w4_t7", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w4_t8", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 2 ──────────────────────────────────────────────────────────────
+    { week:5, month:2, tasks:[
+      {id:"w5_t1", cat:"learning",    text:'Listen: "Howie & Theresa Seminar" — WWG App › WWG Store › Search "702"'},
+      {id:"w5_t2", cat:"learning",    text:'Watch: "People Skills" — championleadership1.com › Training Videos'},
+      {id:"w5_t3", cat:"networking",  text:"Practice Interjections: give a compliment + ask a question to 1+ person per day"},
+      {id:"w5_t4", cat:"networking",  text:"Call 3 people to share your business or retail website"},
+      {id:"w5_t5", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w5_t6", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w5_t7", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:6, month:2, tasks:[
+      {id:"w6_t1", cat:"learning",    text:'Listen: "Try or Cry" — WWG App › WWG Store › Search "AM108"'},
+      {id:"w6_t2", cat:"learning",    text:'Watch: "How to Get a Customer Order" — championleadership1.com › Training Videos'},
+      {id:"w6_t3", cat:"learning",    text:'Watch: "SSI" — Amway App / amway.com › Education › Search "SSI"'},
+      {id:"w6_t4", cat:"networking",  text:"Practice Interjections: say 'Hi, how are you?' to everyone you encounter"},
+      {id:"w6_t5", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w6_t6", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w6_t7", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:7, month:2, tasks:[
+      {id:"w7_t1", cat:"learning",    text:'Listen: "SL 2023 — Toms and Erickson" — WWG App › WWG Store › Search "1367"'},
+      {id:"w7_t2", cat:"learning",    text:'Watch: "Power of Being Core" — championleadership1.com › Training Videos'},
+      {id:"w7_t3", cat:"learning",    text:'Print and study: "Core: 10 Habits" and "Core Run Monthly Worksheet" — WWG App › Info Center › PDFs'},
+      {id:"w7_t4", cat:"networking",  text:"Practice Interjections: give a genuine compliment to everyone you meet"},
+      {id:"w7_t5", cat:"event",       text:"Promote your Week 10 Retail Event to potential guests"},
+      {id:"w7_t6", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w7_t7", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w7_t8", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:8, month:2, tasks:[
+      {id:"w8_t1", cat:"learning",    text:'Listen: "FED 2022 — Brown and Ericksons" — WWG App › WWG Store › Search "1345"'},
+      {id:"w8_t2", cat:"learning",    text:'Watch: "Maximizing Your Volume" — championleadership1.com › Training Videos'},
+      {id:"w8_t3", cat:"learning",    text:'Watch: "Starting Conversations Naturally" — Amway App / amway.com › Education'},
+      {id:"w8_t4", cat:"networking",  text:"Practice Interjections: 5 Make Awares using your personal story this week"},
+      {id:"w8_t5", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w8_t6", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w8_t7", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 3 ──────────────────────────────────────────────────────────────
+    { week:9, month:3, tasks:[
+      {id:"w9_t1", cat:"learning",    text:'Listen: "FED 2021 — Jassman and Whalen" — WWG App › WWG Store › Search "1288"'},
+      {id:"w9_t2", cat:"learning",    text:'Watch: "Retailing Events" — championleadership1.com › Training Videos'},
+      {id:"w9_t3", cat:"learning",    text:'Watch: "Personal Volume" — Amway App / amway.com › Education'},
+      {id:"w9_t4", cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w9_t5", cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w9_t6", cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w9_t7", cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:10, month:3, tasks:[
+      {id:"w10_t1",cat:"learning",    text:'Listen: "Greg Duncan — Network Marketing" — WWG App › WWG Store › Search "1303"'},
+      {id:"w10_t2",cat:"learning",    text:'Watch: "How to Do a Health Break" — championleadership1.com › Training Videos'},
+      {id:"w10_t3",cat:"learning",    text:"Study Health Break Outline — Danzik Motivation Newsletter"},
+      {id:"w10_t4",cat:"event",       text:"Complete a Health Break with 1+ person (virtual or live, simplified or full)"},
+      {id:"w10_t5",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w10_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w10_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w10_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:11, month:3, tasks:[
+      {id:"w11_t1",cat:"learning",    text:'Listen: "SL 2022 — Ewing and Yuen" — WWG App › WWG Store › Search "1315"'},
+      {id:"w11_t2",cat:"learning",    text:'Watch: "PV/BV" — Amway App / amway.com › Education'},
+      {id:"w11_t3",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w11_t4",cat:"networking",  text:"Follow up with Health Break customers — check if they received their orders"},
+      {id:"w11_t5",cat:"networking",  text:"Interjection outing: mall or park — 2 Make Awares + 1 Drop Message"},
+      {id:"w11_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w11_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w11_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:12, month:3, tasks:[
+      {id:"w12_t1",cat:"learning",    text:'Listen: "FED 2021 — Olynyk and Eaton" — WWG App › WWG Store › Search "1281"'},
+      {id:"w12_t2",cat:"learning",    text:'Watch: "3 Things You Must Know to Get Started in Retail" — championleadership1.com'},
+      {id:"w12_t3",cat:"learning",    text:'Watch: "Personal Performance Bonus" — Amway App / amway.com › Education'},
+      {id:"w12_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w12_t5",cat:"networking",  text:"Follow up with Health Break customers — check if they are enjoying their orders"},
+      {id:"w12_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w12_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w12_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 4 ──────────────────────────────────────────────────────────────
+    { week:13, month:4, tasks:[
+      {id:"w13_t1",cat:"learning",    text:'Listen: "Carrithers Emerald Rally" — WWG App › WWG Store › Search "1323"'},
+      {id:"w13_t2",cat:"learning",    text:"Listen: Money Management Conference Call — WWG App › Topics"},
+      {id:"w13_t3",cat:"learning",    text:'Watch: "Money Management" — championleadership1.com › Training Videos'},
+      {id:"w13_t4",cat:"event",       text:"Complete a Budget — print and fill out the Budget Worksheet (WWG App › Info Center › PDFs)"},
+      {id:"w13_t5",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w13_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w13_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w13_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:14, month:4, tasks:[
+      {id:"w14_t1",cat:"learning",    text:'Listen: "SL 2022 — Whalen and Hawkins" — WWG App › WWG Store › Search "1310"'},
+      {id:"w14_t2",cat:"learning",    text:'Watch: "Organizing Your Customers" — championleadership1.com › Training Videos'},
+      {id:"w14_t3",cat:"learning",    text:"Review Customer Profile Form and Quick Customer Survey — WWG App › Info Center › PDFs"},
+      {id:"w14_t4",cat:"event",       text:"Create your Customer Binder — organize existing customers with their profiles"},
+      {id:"w14_t5",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w14_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w14_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w14_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:15, month:4, tasks:[
+      {id:"w15_t1",cat:"learning",    text:'Listen: "Diamond Seminar — Olynyk" — WWG App › WWG Store › Search "1313"'},
+      {id:"w15_t2",cat:"learning",    text:'Watch: "Dress for Success" — championleadership1.com › Training Videos'},
+      {id:"w15_t3",cat:"learning",    text:'Watch: "Group Volume" — Amway App / amway.com › Education'},
+      {id:"w15_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w15_t5",cat:"networking",  text:"Interjection outing: gym or Farmer's Market — 2 Make Awares + 1 Drop Message"},
+      {id:"w15_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w15_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w15_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:16, month:4, tasks:[
+      {id:"w16_t1",cat:"learning",    text:'Listen: "FED 2022 — Rosario and Rice" — WWG App › WWG Store › Search "1343"'},
+      {id:"w16_t2",cat:"learning",    text:'Watch: "Business Structure" — Amway App / amway.com › Education'},
+      {id:"w16_t3",cat:"learning",    text:'Study "Depth vs. Width" — Business Gameplan PDF (WWG App › Info Center › PDFs)'},
+      {id:"w16_t4",cat:"learning",    text:'Study Eagle and Double Eagle qualifications — PDF in WWG App › Info Center'},
+      {id:"w16_t5",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w16_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w16_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w16_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 5 ──────────────────────────────────────────────────────────────
+    { week:17, month:5, tasks:[
+      {id:"w17_t1",cat:"learning",    text:'Listen: "FED 2021 — Phillips, Ewing, Yadao" — WWG App › WWG Store › Search "1280"'},
+      {id:"w17_t2",cat:"learning",    text:'Watch: "Use MyShop to Build Your Business" — Amway App / amway.com › Education'},
+      {id:"w17_t3",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w17_t4",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w17_t5",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w17_t6",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:18, month:5, tasks:[
+      {id:"w18_t1",cat:"learning",    text:'Listen: "SL Diamonds Men\'s Panel — St. Paul 2023" — WWG App › WWG Store › Search "1365"'},
+      {id:"w18_t2",cat:"learning",    text:'Watch: "Cashflow Quadrant" — championleadership1.com › Training Videos'},
+      {id:"w18_t3",cat:"learning",    text:"Learn about Amway — weareamway.com, iboai.com, ibofacts.com"},
+      {id:"w18_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w18_t5",cat:"networking",  text:"Find a local event — get 2 Make Awares + 1 Drop Message"},
+      {id:"w18_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w18_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w18_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:19, month:5, tasks:[
+      {id:"w19_t1",cat:"learning",    text:'Listen: "FED 2022 — Olynyk" — WWG App › WWG Store › Search "1350"'},
+      {id:"w19_t2",cat:"learning",    text:"Listen: Mentorship Conference Call — WWG App › Topics"},
+      {id:"w19_t3",cat:"learning",    text:'Watch: "Differential Bonus" — Amway App / amway.com › Education'},
+      {id:"w19_t4",cat:"event",       text:"Promote your Week 21 Retail Event (Beauty Break) to potential guests"},
+      {id:"w19_t5",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w19_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w19_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w19_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:20, month:5, tasks:[
+      {id:"w20_t1",cat:"learning",    text:'Listen: "SL 2023 — Herschelman and Felber" — WWG App › WWG Store › Search "1368"'},
+      {id:"w20_t2",cat:"learning",    text:'Watch: "Simplified Beauty Break" — championleadership1.com › Training Videos'},
+      {id:"w20_t3",cat:"learning",    text:"Learn about Artistry — WWG App › Retail › Beauty › 2026 Artistry Brand Video"},
+      {id:"w20_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w20_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w20_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w20_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 6 ──────────────────────────────────────────────────────────────
+    { week:21, month:6, tasks:[
+      {id:"w21_t1",cat:"learning",    text:'Listen: "Now is the Time" — WWG App › WWG Store › Search "AM104"'},
+      {id:"w21_t2",cat:"learning",    text:"Learn Artistry Virtual Beauty Tool — amway.com › Artistry › Virtual Try-On"},
+      {id:"w21_t3",cat:"event",       text:"Complete a virtual or live Beauty Break with 1+ person"},
+      {id:"w21_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w21_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w21_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w21_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:22, month:6, tasks:[
+      {id:"w22_t1",cat:"learning",    text:'Listen: "SL 2023 — Tuitupou and Hawkins" — WWG App › WWG Store › Search "1381"'},
+      {id:"w22_t2",cat:"learning",    text:'Watch: "Reasons for Big Business" — championleadership1.com › Training Videos'},
+      {id:"w22_t3",cat:"learning",    text:'Watch: "Differential Bonus with Multiple Frontlines" — Amway App / amway.com › Education'},
+      {id:"w22_t4",cat:"networking",  text:"Practice Interjections: 5 Make Awares + 2 Drop Messages this week"},
+      {id:"w22_t5",cat:"networking",  text:"Attend a networking event — get 1 Make Aware + 1 Drop Message"},
+      {id:"w22_t6",cat:"networking",  text:"Follow up with Beauty Break customers — check if they received their orders"},
+      {id:"w22_t7",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w22_t8",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w22_t9",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:23, month:6, tasks:[
+      {id:"w23_t1",cat:"learning",    text:'Listen: "Diamond Bio — Kummer" — WWG App › WWG Store › Search "DB433"'},
+      {id:"w23_t2",cat:"learning",    text:"Listen: FAQs Conference Call — WWG App › Topics"},
+      {id:"w23_t3",cat:"learning",    text:'Watch: "Sell eSpring Water Purifier — Start Selling" — Amway App / amway.com › Education'},
+      {id:"w23_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w23_t5",cat:"networking",  text:"Follow up with Beauty Break customers — check if they are enjoying their orders"},
+      {id:"w23_t6",cat:"networking",  text:"Talk to one person about eSpring Water Purifier"},
+      {id:"w23_t7",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w23_t8",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w23_t9",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:24, month:6, tasks:[
+      {id:"w24_t1",cat:"learning",    text:'Listen: "Family Reunion 2023 — Rosario and Eaton" — WWG App › WWG Store › Search "1396"'},
+      {id:"w24_t2",cat:"learning",    text:'Watch: "Customer Tips and Mindset" — championleadership1.com › Training Videos'},
+      {id:"w24_t3",cat:"learning",    text:'Watch: "Sell Atmosphere Sky and Mini Air: Start Selling" — Amway App / amway.com › Education'},
+      {id:"w24_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w24_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w24_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w24_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 7 ──────────────────────────────────────────────────────────────
+    { week:25, month:7, tasks:[
+      {id:"w25_t1",cat:"learning",    text:'Listen: "FED 2023 — Herschelman" — WWG App › WWG Store › Search "1403"'},
+      {id:"w25_t2",cat:"learning",    text:'Watch: "Things I\'ve Learned from Mentors" — championleadership1.com › Training Videos'},
+      {id:"w25_t3",cat:"learning",    text:'Watch: "Sell Atmosphere Sky: Price Value" — Amway App / amway.com › Education'},
+      {id:"w25_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w25_t5",cat:"networking",  text:"Talk to one person about Atmosphere Air Treatment products"},
+      {id:"w25_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w25_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w25_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:26, month:7, tasks:[
+      {id:"w26_t1",cat:"learning",    text:'Listen: "Diamond Seminar — Tuitupou" — WWG App › WWG Store › Search "1434"'},
+      {id:"w26_t2",cat:"learning",    text:'Watch: "Bronze Foundation Incentive (BFI)" — Amway App / amway.com › Education'},
+      {id:"w26_t3",cat:"learning",    text:"Learn about Bronze Foundation — Core Plus Incentives 2025 PDF (WWG App › Info Center › PDFs)"},
+      {id:"w26_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w26_t5",cat:"networking",  text:"Find a local event — get 2 Make Awares + 1 Drop Message"},
+      {id:"w26_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w26_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w26_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:27, month:7, tasks:[
+      {id:"w27_t1",cat:"learning",    text:'Listen: "SL 2023 — Rosario and Kummer" — WWG App › WWG Store › Search "1384"'},
+      {id:"w27_t2",cat:"learning",    text:"Listen: Handling Objections Conference Call — WWG App › Topics"},
+      {id:"w27_t3",cat:"learning",    text:'Watch: "Selling Nutrilite Organics" — Amway App / amway.com › Education'},
+      {id:"w27_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w27_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w27_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w27_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:28, month:7, tasks:[
+      {id:"w28_t1",cat:"learning",    text:'Listen: "FED 2023 — Kelly and Darci Ewing" — WWG App › WWG Store › Search "1411"'},
+      {id:"w28_t2",cat:"learning",    text:'Watch: "2023 Product Blast" — WWG App › Info Center › PDFs'},
+      {id:"w28_t3",cat:"learning",    text:'Watch: "Nutrilite Featured Products" — Amway App / amway.com › Education'},
+      {id:"w28_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w28_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w28_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w28_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 8 ──────────────────────────────────────────────────────────────
+    { week:29, month:8, tasks:[
+      {id:"w29_t1",cat:"learning",    text:'Listen: "FED 2023 — Trevor and Lexi Baker" — WWG App › WWG Store › Search "1413"'},
+      {id:"w29_t2",cat:"learning",    text:'Watch: "Things I Love About the Business" — championleadership1.com › Training Videos'},
+      {id:"w29_t3",cat:"learning",    text:'Watch: "Nutrilite Traceability" — Amway App / amway.com › Education'},
+      {id:"w29_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w29_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w29_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w29_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:30, month:8, tasks:[
+      {id:"w30_t1",cat:"learning",    text:'Listen: "FED 2023 — Howie and Theresa Danzik" — WWG App › WWG Store › Search "1422"'},
+      {id:"w30_t2",cat:"learning",    text:"Listen: Time Management Conference Call — WWG App › Topics"},
+      {id:"w30_t3",cat:"learning",    text:'Watch: "Nutrilite Double X 1: Start Selling" — Amway App / amway.com › Education'},
+      {id:"w30_t4",cat:"networking",  text:"Interjection outing: networking event — 3 Make Awares + 2 Drop Messages"},
+      {id:"w30_t5",cat:"networking",  text:"Call 3 people to share your MyShop retail website or business opportunity"},
+      {id:"w30_t6",cat:"event",       text:"Promote your Week 32 Begin 30 Event to potential guests"},
+      {id:"w30_t7",cat:"networking",  text:"Talk to 1+ person about Nutrilite Double X"},
+      {id:"w30_t8",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w30_t9",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w30_t10",cat:"habit",      text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:31, month:8, tasks:[
+      {id:"w31_t1",cat:"learning",    text:'Listen: "Family Reunion 2019 — Micahl and Lorena Wood" — WWG App › WWG Store › Search "1198"'},
+      {id:"w31_t2",cat:"learning",    text:"Listen: Scheduling Conference Call + write out your schedule for the upcoming week — WWG App › Topics"},
+      {id:"w31_t3",cat:"learning",    text:'Watch: "Nutrilite Double X 2: PhytoProtect Blend" — Amway App / amway.com › Education'},
+      {id:"w31_t4",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w31_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w31_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w31_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:32, month:8, tasks:[
+      {id:"w32_t1",cat:"learning",    text:'Listen: "Freedom" — WWG App › WWG Store › Search "AM105"'},
+      {id:"w32_t2",cat:"learning",    text:'Watch: "Begin 30 Training" — championleadership1.com › Training Videos'},
+      {id:"w32_t3",cat:"learning",    text:"Learn the Begin 30 Outline — Danzik Motivation Newsletter"},
+      {id:"w32_t4",cat:"learning",    text:"Learn Begin 30 Key Points — WWG App › Info Center"},
+      {id:"w32_t5",cat:"learning",    text:'Watch: "Begin 30 by Ron Tilles" video — WWG App › Info Center'},
+      {id:"w32_t6",cat:"event",       text:"Complete a virtual or live Begin 30 Event with 1+ person"},
+      {id:"w32_t7",cat:"networking",  text:"Practice Interjections: 7 Make Awares + 3 Drop Messages this week"},
+      {id:"w32_t8",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w32_t9",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w32_t10",cat:"habit",      text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 9 ──────────────────────────────────────────────────────────────
+    { week:33, month:9, tasks:[
+      {id:"w33_t1",cat:"learning",    text:'Listen: "Diamond Bio — Bill and Sandy Hawkins" — WWG App › WWG Store › Search "1169"'},
+      {id:"w33_t2",cat:"learning",    text:'Watch: "Bronze Builder Incentive (BBI)" — Amway App / amway.com › Education'},
+      {id:"w33_t3",cat:"learning",    text:"Learn about Bronze Builder — Core Plus Incentives 2025 PDF (WWG App › Info Center › PDFs)"},
+      {id:"w33_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w33_t5",cat:"networking",  text:"Follow up with Begin 30 customers — check if they received their orders"},
+      {id:"w33_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w33_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w33_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:34, month:9, tasks:[
+      {id:"w34_t1",cat:"learning",    text:'Listen: "Family Reunion 2023 — Kummer and Hawkins" — WWG App › WWG Store › Search "1389"'},
+      {id:"w34_t2",cat:"learning",    text:'Watch: "Follow Up & Follow Through: Serving & Thanking" and "Organizational System" videos — championleadership1.com'},
+      {id:"w34_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w34_t4",cat:"networking",  text:"Find a local event — get 3 Make Awares + 2 Drop Messages"},
+      {id:"w34_t5",cat:"networking",  text:"Follow up with Begin 30 customers — check if they are enjoying their orders"},
+      {id:"w34_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w34_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w34_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:35, month:9, tasks:[
+      {id:"w35_t1",cat:"learning",    text:'Listen: "SL 2024 — Jon and Jen Rosario" — WWG App › WWG Store › Search "1448"'},
+      {id:"w35_t2",cat:"learning",    text:"Listen: Upline Relationships Conference Call — WWG App › Topics"},
+      {id:"w35_t3",cat:"learning",    text:'Watch: "Nutrilite Double X 3: Price Value" — Amway App / amway.com › Education'},
+      {id:"w35_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w35_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w35_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w35_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:36, month:9, tasks:[
+      {id:"w36_t1",cat:"learning",    text:'Listen: "Diamond Seminar — Shane and Joey Yadao" — WWG App › WWG Store › Search "1209"'},
+      {id:"w36_t2",cat:"learning",    text:'Watch: "FAQs Training" — championleadership1.com › Training Videos'},
+      {id:"w36_t3",cat:"learning",    text:'Watch: "Probiotics: Understand the Basics" — Amway App / amway.com › Education'},
+      {id:"w36_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w36_t5",cat:"networking",  text:"Interjection outing: walk the mall — 3 Make Awares + 2 Drop Messages"},
+      {id:"w36_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w36_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w36_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 10 ─────────────────────────────────────────────────────────────
+    { week:37, month:10, tasks:[
+      {id:"w37_t1",cat:"learning",    text:'Listen: "SL 2023 — Ewing and Phillips" — WWG App › WWG Store › Search "1366"'},
+      {id:"w37_t2",cat:"learning",    text:"Listen: 10 Core Steps Conference Call — WWG App › Topics"},
+      {id:"w37_t3",cat:"learning",    text:'Watch two "Sell Nutrilite Probiotics" videos — Amway App / amway.com › Education'},
+      {id:"w37_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w37_t5",cat:"networking",  text:"Talk to someone about Nutrilite Probiotics"},
+      {id:"w37_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w37_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w37_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:38, month:10, tasks:[
+      {id:"w38_t1",cat:"learning",    text:'Listen: "Pump in the Desert" — WWG App › WWG Store › Search "762"'},
+      {id:"w38_t2",cat:"learning",    text:'Watch: "Leadership Observations" — championleadership1.com › Training Videos'},
+      {id:"w38_t3",cat:"learning",    text:'Watch: "Get Started on Social Media" — Amway App / amway.com › Education'},
+      {id:"w38_t4",cat:"learning",    text:"Review Social Media Guidelines PDF — WWG App › Info Center › PDFs"},
+      {id:"w38_t5",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w38_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w38_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w38_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:39, month:10, tasks:[
+      {id:"w39_t1",cat:"learning",    text:'Listen: "SL 2024 — Glen and Joya Baker" — WWG App › WWG Store › Search "1462"'},
+      {id:"w39_t2",cat:"learning",    text:"Listen: Scheduling Conference Call — write out your schedule for the week — WWG App › Topics"},
+      {id:"w39_t3",cat:"learning",    text:'Watch: "Understand Business Accounts on Social Media" — Amway App / amway.com › Education'},
+      {id:"w39_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w39_t5",cat:"networking",  text:"Call 3 people to share MyShop retail website or business opportunity"},
+      {id:"w39_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w39_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w39_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:40, month:10, tasks:[
+      {id:"w40_t1",cat:"learning",    text:'Listen: "SL 2019 — Tracey and Kimberley Eaton" — WWG App › WWG Store › Search "1160"'},
+      {id:"w40_t2",cat:"learning",    text:"Listen: Big Business vs. Small Business Conference Call — WWG App › Topics"},
+      {id:"w40_t3",cat:"learning",    text:'Watch: "Achieve a Qualified Month" — Amway App / amway.com › Education'},
+      {id:"w40_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w40_t5",cat:"networking",  text:"Attend a local event — 3 Make Awares + 2 Drop Messages"},
+      {id:"w40_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w40_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w40_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 11 ─────────────────────────────────────────────────────────────
+    { week:41, month:11, tasks:[
+      {id:"w41_t1",cat:"learning",    text:'Listen: "SL 2024 — Dan and Sandy Yuen" — WWG App › WWG Store › Search "1455"'},
+      {id:"w41_t2",cat:"learning",    text:'Watch: "Leadership Tips" — championleadership1.com › Training Videos'},
+      {id:"w41_t3",cat:"learning",    text:'Watch: "Prepare to Break a Leg" — Amway App / amway.com › Education'},
+      {id:"w41_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w41_t5",cat:"networking",  text:"Talk to 1+ person about your favorite Amway product"},
+      {id:"w41_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w41_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w41_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:42, month:11, tasks:[
+      {id:"w42_t1",cat:"learning",    text:'Listen: "Overcoming Offenses" — WWG App › WWG Store › Search "774"'},
+      {id:"w42_t2",cat:"learning",    text:"Listen: Helpful Tips Conference Call — WWG App › Topics"},
+      {id:"w42_t3",cat:"learning",    text:'Watch: "Two-Time Cash Incentives (TTCI)" — Amway App / amway.com › Education'},
+      {id:"w42_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w42_t5",cat:"networking",  text:"Learn about Muscle Multiplier — share with 1+ person"},
+      {id:"w42_t6",cat:"event",       text:"Create your Vision / Dream Board — images and goals that represent your why"},
+      {id:"w42_t7",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w42_t8",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w42_t9",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:43, month:11, tasks:[
+      {id:"w43_t1",cat:"learning",    text:'Listen: "SL 2022 — Rosario and Crandell" — WWG App › WWG Store › Search "1319"'},
+      {id:"w43_t2",cat:"learning",    text:'Watch: "Creating a Positive Atmosphere" — Amway App / amway.com › Education'},
+      {id:"w43_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w43_t4",cat:"networking",  text:"Interjection outing: mall or Farmer's Market — 2 Make Awares + 1 Drop Message"},
+      {id:"w43_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w43_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w43_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:44, month:11, tasks:[
+      {id:"w44_t1",cat:"learning",    text:'Listen: "10 Points that Make Amway Special" — WWG App › WWG Store › Search "AM106"'},
+      {id:"w44_t2",cat:"learning",    text:'Watch: "Focus on Purpose" — Amway App / amway.com › Education'},
+      {id:"w44_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w44_t4",cat:"networking",  text:"Learn about LongXevity Eye Cream — tell 1+ person about it"},
+      {id:"w44_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w44_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w44_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 12 ─────────────────────────────────────────────────────────────
+    { week:45, month:12, tasks:[
+      {id:"w45_t1",cat:"learning",    text:'Listen: "FED 2019 — Bob and Shelly Kummer" — WWG App › WWG Store › Search "1204"'},
+      {id:"w45_t2",cat:"learning",    text:'Watch: "The Focus of Success" — Amway App / amway.com › Education'},
+      {id:"w45_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w45_t4",cat:"networking",  text:"Learn about Nutrilite Energy and Focus supplement — tell 1+ person about it"},
+      {id:"w45_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w45_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w45_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:46, month:12, tasks:[
+      {id:"w46_t1",cat:"learning",    text:'Listen: "FED 2020 — Howie and Theresa Danzik" — WWG App › WWG Store › Search "1246"'},
+      {id:"w46_t2",cat:"learning",    text:'Watch: "Monthly Leadership Bonus" — Amway App / amway.com › Education'},
+      {id:"w46_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w46_t4",cat:"networking",  text:"Learn about XS Energy drinks — tell 1+ person about them"},
+      {id:"w46_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w46_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w46_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:47, month:12, tasks:[
+      {id:"w47_t1",cat:"learning",    text:'Listen: "FED 2019 — Jon and Jen Rosario" — WWG App › WWG Store › Search "1230"'},
+      {id:"w47_t2",cat:"learning",    text:'Watch: "Raise the Main" — Amway App / amway.com › Education'},
+      {id:"w47_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w47_t4",cat:"networking",  text:"Learn about Amway Home Laundry products — tell 1+ person about them"},
+      {id:"w47_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w47_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w47_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:48, month:12, tasks:[
+      {id:"w48_t1",cat:"learning",    text:'Listen: "Family Reunion 2019 — Jake and Jolene Carrithers" — WWG App › WWG Store › Search "1189"'},
+      {id:"w48_t2",cat:"learning",    text:'Watch: "Resilience is a Muscle" — Amway App / amway.com › Education'},
+      {id:"w48_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w48_t4",cat:"event",       text:"Promote your Week 50 Amway Home Retail Event to potential guests"},
+      {id:"w48_t5",cat:"networking",  text:"Learn about Amway Home surface cleaners — tell 1+ person about them"},
+      {id:"w48_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w48_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w48_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    // ── MONTH 13 ─────────────────────────────────────────────────────────────
+    { week:49, month:13, tasks:[
+      {id:"w49_t1",cat:"learning",    text:'Listen: "Diamond Bio — Brad and Julie Duncan" — WWG App › WWG Store › Search "DB388"'},
+      {id:"w49_t2",cat:"learning",    text:'Watch: "Go for Magnificence" — Amway App / amway.com › Education'},
+      {id:"w49_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w49_t4",cat:"networking",  text:"Learn about Amway Dish products — tell 1+ person about them"},
+      {id:"w49_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w49_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w49_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:50, month:13, tasks:[
+      {id:"w50_t1",cat:"learning",    text:'Listen: "SL 2024 — Bill and Sandy Hawkins" — WWG App › WWG Store › Search "1454"'},
+      {id:"w50_t2",cat:"learning",    text:'Watch: "Go, Team" — Amway App / amway.com › Education'},
+      {id:"w50_t3",cat:"learning",    text:'Learn Amway Home product demos — Search "Amway Home Demos" in Amway App or amway.com › Education › Resources tab'},
+      {id:"w50_t4",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w50_t5",cat:"event",       text:"Complete a virtual or live Amway Home Retail Event with 1+ person"},
+      {id:"w50_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w50_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w50_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:51, month:13, tasks:[
+      {id:"w51_t1",cat:"learning",    text:'Listen: "FED 2022 — Herschelman and Eaton" — WWG App › WWG Store › Search "1335"'},
+      {id:"w51_t2",cat:"learning",    text:'Watch: "Overcoming Great Adversity" — WWG App › WWG Store › Search "1487"'},
+      {id:"w51_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w51_t4",cat:"networking",  text:"Learn about Nutrilite Ashwagandha — tell 1+ person about it"},
+      {id:"w51_t5",cat:"networking",  text:"Follow up with Amway Home Event customers — check if they received their orders"},
+      {id:"w51_t6",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w51_t7",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w51_t8",cat:"habit",       text:"Send Topic to coach with takeaways and a question"}
+    ]},
+    { week:52, month:13, tasks:[
+      {id:"w52_t1",cat:"learning",    text:'Listen: "Hope is Your Super Power" — WWG App › WWG Store › Search "1170"'},
+      {id:"w52_t2",cat:"learning",    text:'Watch: "Lead with Influence" — Amway App / amway.com › Education'},
+      {id:"w52_t3",cat:"networking",  text:"Practice Interjections: 10 Make Awares + 4 Drop Messages this week"},
+      {id:"w52_t4",cat:"networking",  text:"Follow up with Amway Home Event customers — check if they are enjoying their orders"},
+      {id:"w52_t5",cat:"habit",       text:"Clear Topics Daily"},
+      {id:"w52_t6",cat:"habit",       text:"Check DreamStream Daily"},
+      {id:"w52_t7",cat:"habit",       text:"Send Topic to coach with takeaways and a question"},
+      {id:"w52_t8",cat:"event",       text:"🎉 GREAT JOB! You finished the 52-Week IBO Training. Celebrate your growth — then do it again!"}
+    ]}
+  ]
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+
+const STORAGE_KEY = 'iboTracker_v4';
+const THEME_STORAGE_KEY = 'iboTracker_v4_theme_v3';
+const MODE_STORAGE_KEY  = 'iboTracker_v4_mode_v1';
+let state = {
+  completedTasks: {},      // weekly task IDs (e.g. w1_t1)
+  completedGoals: {},      // monthly goal IDs (e.g. m1_g0)
+  taskCounters: {},        // {taskId: {goalLabel: currentNumber}}
+  habitDays:    {},        // {taskId: {0..6: true}} — 7 days of week
+  weekNotes:    {},        // {weekNum: "free-text notes"}
+  programStartDate: null,  // ISO YYYY-MM-DD — when the user began Week 1
+  currentMonth: 1,
+  expandedWeeks: {},       // {weekNum: true}
+  goalsExpanded: {},       // {month: true}
+  notesExpanded: {},       // {month: true|false} — collapsed after first view
+  notesSeen:     {},       // {month: true} — has the user seen this month's note?
+  celebrated:    {},       // {20:true, 40:true, 60:true, 80:true, 100:true}
+  activityDays:  {},       // {"YYYY-MM-DD": true} — for streak tracking
+  accordionMode: true,
+  lastVisit: null,         // ISO timestamp of last load (for greeting)
+  lastSaved: null
+};
+
+const MONTHLY_NOTES = {
+  1:  "Welcome to your first month. Every check on this page is a step today's you took that yesterday's you didn't. Start small, start often — momentum beats motivation.",
+  2:  "By the end of this month, the daily habits should start to feel automatic. Don't aim for perfect — aim for consistent. Boring is winning.",
+  3:  "This is the month of your first event. The first time is always the hardest; after that, it's just doing it again. Trust the system.",
+  4:  "Building the business and managing the money are two halves of the same skill. Track both — the way you're tracking everything else here.",
+  5:  "By now, the rhythm should feel familiar. Same checkboxes, bigger goals. That's the whole game.",
+  6:  "Look back at where you were in Week 1. You couldn't have imagined doing what you're doing now. That gap is your proof — keep widening it.",
+  7:  "New month, new event to plan. The plans you're making now are the work that pays off six months from now. Trust the calendar.",
+  8:  "Each event is easier than the last. That's not magic, that's reps. Reps you put in, on purpose.",
+  9:  "You're past the halfway point. The hardest part isn't ahead anymore — it's behind you. Now you're compounding.",
+  10: "The product knowledge is starting to stack up. So is the muscle memory. Keep showing up and let the math do its work.",
+  11: "Take a quiet moment this month and actually do the vision board. The future-you that looks back will be glad you did.",
+  12: "One more month. You've come far. Don't slow down now — finish what you started. The last sprint matters most.",
+  13: "Final month. The finish line is in view. Take one last sprint, then look back at everything you've built. That's worth celebrating."
+};
+
+const MILESTONES = {
+  20:  { emoji:"🦅", title:"Eagle",        msg:"First training milestone reached. The foundation is set — keep stacking the wins." },
+  40:  { emoji:"⭐",  title:"Double Eagle", msg:"Two milestones in. The rhythm is real now. Keep showing up." },
+  60:  { emoji:"🏆", title:"Platinum",     msg:"More than halfway home. You're past the hardest part." },
+  80:  { emoji:"💚", title:"Emerald",      msg:"Late-stage training. The finish line is in view — finish strong." },
+  100: { emoji:"💎", title:"Diamond",      msg:"52 weeks complete. Every check, every goal — yours. Now… do it again." }
+};
+
+// Rank tiers shown as a badge in the hero (highest matching tier wins)
+const RANKS = [
+  { min: 100, emoji: "💎", name: "Diamond" },
+  { min: 80,  emoji: "💚", name: "Emerald" },
+  { min: 60,  emoji: "🏆", name: "Platinum" },
+  { min: 40,  emoji: "⭐", name: "Double Eagle" },
+  { min: 20,  emoji: "🦅", name: "Eagle" }
+];
+function getCurrentRank(pct) { return RANKS.find(r => pct >= r.min) || null; }
+
+const THEME_COLORS = {
+  plum:   '#a855f7',
+  ocean:  '#06b6d4',
+  sunset: '#f97316',
+  forest: '#10b981',
+  slate:  '#6366f1',
+  cb:     '#0072b2'
+};
+let saveTimer = null;
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) Object.assign(state, JSON.parse(raw));
+  } catch(e) {}
+}
+
+function saveState() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    state.lastSaved = new Date().toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    const lbl = document.getElementById('last-saved-label');
+    if (lbl) lbl.textContent = 'Last saved: ' + formatTime(state.lastSaved);
+  }, 300);
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+
+function getWeek(n) { return TRACKER_DATA.weeks[n-1]; }
+function getMonthWeeks(monthNum) { return TRACKER_DATA.weeks.filter(w => w.month === monthNum); }
+function getMonthGoals(monthNum) { return TRACKER_DATA.monthlyGoals[monthNum] || []; }
+
+function isTaskDone(t) {
+  // Counter tasks: complete when all numeric goals reach their targets
+  const goals = extractGoalsFromTask(t.text);
+  if (goals.length > 0) {
+    return isCounterTaskComplete(t.id, goals);
+  }
+  // Plain check tasks (including habit tasks — single weekly checkbox)
+  return !!state.completedTasks[t.id];
+}
+
+function getWeekCompletion(weekNum) {
+  const w = getWeek(weekNum);
+  const done = w.tasks.filter(isTaskDone).length;
+  return { done, total: w.tasks.length };
+}
+
+function getMonthGoalCompletion(monthNum) {
+  const goals = getMonthGoals(monthNum);
+  const done = goals.filter((_, i) => state.completedGoals[`m${monthNum}_g${i}`]).length;
+  return { done, total: goals.length };
+}
+
+function getMonthTaskCompletion(monthNum) {
+  let done=0, total=0, weeksDone=0, weeksTotal=0;
+  getMonthWeeks(monthNum).forEach(w => {
+    weeksTotal++;
+    const wDone = w.tasks.filter(isTaskDone).length;
+    total += w.tasks.length;
+    done += wDone;
+    if (wDone === w.tasks.length) weeksDone++;
+  });
+  return { done, total, weeksDone, weeksTotal };
+}
+
+function getMonthCombined(monthNum) {
+  const g = getMonthGoalCompletion(monthNum);
+  const t = getMonthTaskCompletion(monthNum);
+  return { done: g.done + t.done, total: g.total + t.total };
+}
+
+function getTotalCompletion() {
+  let done=0, total=0;
+  TRACKER_DATA.weeks.forEach(w => {
+    total += w.tasks.length;
+    done += w.tasks.filter(isTaskDone).length;
+  });
+  for (let m = 1; m <= 13; m++) {
+    const g = getMonthGoalCompletion(m);
+    total += g.total;
+    done += g.done;
+  }
+  return { done, total };
+}
+
+function isMonthComplete(monthNum) {
+  const c = getMonthCombined(monthNum);
+  return c.total > 0 && c.done === c.total;
+}
+
+function catMeta(cat) {
+  const m = {
+    learning:   {label:'Learning',     cls:'chip-learning'},
+    habit:      {label:'Daily Habit',  cls:'chip-habit'},
+    networking: {label:'Networking',   cls:'chip-networking'},
+    event:      {label:'Event',        cls:'chip-event'}
+  };
+  return m[cat] || {label:cat, cls:'chip-learning'};
+}
+
+function formatTime(iso) {
+  if (!iso) return 'never';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+       + ' at ' + d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+}
+
+// Pick a motivating emoji + message based on % complete
+function motivator(pct) {
+  if (pct === 0)   return { emoji:'🌱', msg:"Let's plant the seed for this month." };
+  if (pct < 25)    return { emoji:'🌿', msg:"You've started — every check counts." };
+  if (pct < 50)    return { emoji:'🌸', msg:"Building momentum. Keep going!" };
+  if (pct < 75)    return { emoji:'⭐',  msg:"You're crushing it!" };
+  if (pct < 100)   return { emoji:'🔥', msg:"Almost there — finish strong!" };
+  return                  { emoji:'🏆', msg:"Month complete. Incredible work!" };
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+
+function renderMonthDropdown() {
+  const sel = document.getElementById('month-dropdown');
+  sel.innerHTML = '';
+  for (let m = 1; m <= 13; m++) {
+    const c = getMonthCombined(m);
+    const pct = c.total ? Math.round(c.done/c.total*100) : 0;
+    const opt = document.createElement('option');
+    opt.value = m;
+    let suffix = '';
+    if (pct === 100) suffix = ' ✓';
+    else if (pct > 0) suffix = ` (${pct}%)`;
+    opt.textContent = `Month ${m} of 13${suffix}`;
+    if (pct === 100) opt.className = 'week-option-done';
+    else if (pct > 0) opt.className = 'week-option-partial';
+    sel.appendChild(opt);
+  }
+  sel.value = state.currentMonth;
+}
+
+function renderMonthSummary(monthNum) {
+  const goals = getMonthGoalCompletion(monthNum);
+  const tasks = getMonthTaskCompletion(monthNum);
+  const combined = getMonthCombined(monthNum);
+  const pct = combined.total ? Math.round(combined.done/combined.total*100) : 0;
+  const mot = motivator(pct);
+  const goalPct = goals.total ? Math.round(goals.done/goals.total*100) : 0;
+  const taskPct = tasks.total ? Math.round(tasks.done/tasks.total*100) : 0;
+
+  const weeks = getMonthWeeks(monthNum);
+
+  let pipsHtml = '';
+  weeks.forEach(w => {
+    const c = getWeekCompletion(w.week);
+    const wPct = c.total ? Math.round(c.done/c.total*100) : 0;
+    const cls = wPct === 100 ? 'complete' : '';
+    const idxInMonth = weeks.findIndex(x => x.week === w.week) + 1;
+    pipsHtml += `
+      <div class="week-pip ${cls}" onclick="scrollToWeek(${w.week})">
+        <div class="wp-label">Week ${idxInMonth}</div>
+        <div class="wp-pct">${wPct}%</div>
+        <div class="wp-bar"><div class="wp-fill" style="width:${wPct}%"></div></div>
+      </div>`;
+  });
+
+  document.getElementById('month-summary').innerHTML = `
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <div class="ms-label">Month ${monthNum} of 13</div>
+        <div class="ms-title">${pct}% Complete <span class="ms-emoji">${mot.emoji}</span></div>
+      </div>
+    </div>
+
+    <div class="ms-bar-label">
+      <span>📋 Monthly Goals</span>
+      <span class="ms-meta">${goals.done}/${goals.total} done</span>
+    </div>
+    <div class="ms-progress-bar"><div class="ms-progress-fill ms-fill-goals" style="width:${goalPct}%"></div></div>
+
+    <div class="ms-bar-label">
+      <span>✅ Weekly Tasks</span>
+      <span class="ms-meta">${tasks.done}/${tasks.total} done · ${tasks.weeksDone}/${tasks.weeksTotal} weeks</span>
+    </div>
+    <div class="ms-progress-bar"><div class="ms-progress-fill ms-fill-tasks" style="width:${taskPct}%"></div></div>
+
+    <div class="ms-message">${mot.msg}</div>
+
+    <div class="week-pips">${pipsHtml}</div>
+  `;
+}
+
+function renderGoalsCard(monthNum) {
+  const goals = getMonthGoals(monthNum);
+  const c = getMonthGoalCompletion(monthNum);
+  const pct = c.total ? Math.round(c.done/c.total*100) : 0;
+  const expanded = state.goalsExpanded[monthNum] !== false;  // default open
+
+  let goalsHtml = '';
+  goals.forEach((g, i) => {
+    const id = `m${monthNum}_g${i}`;
+    const checked = state.completedGoals[id] ? 'checked' : '';
+    const doneCls = state.completedGoals[id] ? 'done' : '';
+    goalsHtml += `
+      <li class="goal-item ${doneCls}">
+        <label>
+          <input type="checkbox" data-goal-id="${id}" onchange="handleGoalCheck(this)" ${checked} style="touch-action:manipulation">
+          <span>${g}</span>
+        </label>
+      </li>`;
+  });
+
+  document.getElementById('goals-card-wrap').innerHTML = `
+    <div class="goals-card ${expanded?'expanded':''}" id="goals-card">
+      <div class="goals-header" onclick="toggleGoalsCard()">
+        <h3>Month ${monthNum} Goals</h3>
+        <span class="goals-stat">${c.done}/${c.total}</span>
+        <span class="goals-toggle">▼</span>
+      </div>
+      <div class="goals-body">
+        <div class="goals-body-inner">
+          <div class="goals-bar"><div class="goals-fill" style="width:${pct}%"></div></div>
+          <ul style="list-style:none;padding:0;margin:0">${goalsHtml}</ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderWeeks(monthNum) {
+  const weeks = getMonthWeeks(monthNum);
+  const programCurrent = getCurrentProgramWeek();
+  let html = '';
+
+  weeks.forEach((w, idx) => {
+    const c = getWeekCompletion(w.week);
+    const pct = c.total ? Math.round(c.done/c.total*100) : 0;
+    const isComplete = pct === 100;
+    const isExpanded = state.expandedWeeks[w.week];
+    const idxInMonth = idx + 1;
+    const mot = motivator(pct);
+    const dateRange = formatDateRange(w.week);
+    const isCurrentWeek = programCurrent === w.week;
+
+    // Build category-grouped task list
+    const cats = ['learning','habit','networking','event'];
+    const grouped = {};
+    cats.forEach(cat => { grouped[cat] = w.tasks.filter(t => t.cat === cat); });
+
+    let bodyHtml = '';
+    if (dateRange) {
+      bodyHtml += `<div class="week-dates">${dateRange}${isCurrentWeek ? ' · <strong>This week</strong>' : ''}</div>`;
+    }
+    cats.forEach(cat => {
+      const tasks = grouped[cat];
+      if (!tasks.length) return;
+      const meta = catMeta(cat);
+      bodyHtml += `<div class="category-group"><h3><span class="chip ${meta.cls}">${meta.label}</span></h3><ul style="list-style:none;padding:0;margin:0">`;
+      tasks.forEach(t => {
+        const goals = extractGoalsFromTask(t.text);
+        const done = isTaskDone(t);
+        const doneCls = done ? 'done' : '';
+        let counterHtml = '';
+        if (goals.length > 0) {
+          counterHtml = '<div class="task-counters">';
+          goals.forEach(g => {
+            const cur = getCounterValue(t.id, g.key);
+            counterHtml += `
+              <div class="counter">
+                <button type="button" class="counter-btn" data-task-id="${t.id}" data-goal="${g.key}" data-target="${g.target}" data-delta="-1" onclick="handleCounterClick(this)" aria-label="Decrease ${g.label}">−</button>
+                <span class="counter-val">${cur}/${g.target} ${g.label}</span>
+                <button type="button" class="counter-btn" data-task-id="${t.id}" data-goal="${g.key}" data-target="${g.target}" data-delta="1" onclick="handleCounterClick(this)" aria-label="Increase ${g.label}">+</button>
+              </div>`;
+          });
+          counterHtml += '</div>';
+        }
+        const checkboxDisabled = goals.length > 0 ? 'disabled' : '';
+        const checkedAttr = done ? 'checked' : '';
+        bodyHtml += `<li class="task-item ${doneCls}"><label><input type="checkbox" data-id="${t.id}" onchange="handleTaskCheck(this)" ${checkedAttr} ${checkboxDisabled} style="touch-action:manipulation"><span>${t.text}</span></label>${counterHtml}</li>`;
+      });
+      bodyHtml += '</ul></div>';
+    });
+
+    // Per-week notes (#4)
+    const noteVal = (state.weekNotes && state.weekNotes[w.week]) || '';
+    bodyHtml += `
+      <div class="week-notes">
+        <label for="notes-${w.week}">Notes for this week</label>
+        <textarea id="notes-${w.week}" data-week="${w.week}" oninput="handleNoteInput(this)" placeholder="Reflections, takeaways, follow-ups…">${noteVal.replace(/</g,'&lt;')}</textarea>
+      </div>`;
+
+    const currentBadge = isCurrentWeek ? '<span class="current-week-badge">Now</span>' : '';
+    html += `
+      <div class="week-card ${isExpanded?'expanded':''} ${isComplete?'complete':''} ${isCurrentWeek?'is-current':''}" id="week-card-${w.week}">
+        <div class="week-header" onclick="toggleWeek(${w.week})">
+          <div class="week-icon">${isComplete?'✓':idxInMonth}</div>
+          <div class="week-info">
+            <div class="w-title">
+              <span>Week ${idxInMonth}${currentBadge}</span>
+              <span class="w-emoji">${mot.emoji}</span>
+            </div>
+            <div class="w-bar"><div class="w-fill" style="width:${pct}%"></div></div>
+            <div class="w-meta">${dateRange ? dateRange + ' · ' : ''}${c.done}/${c.total} tasks · ${pct}%</div>
+          </div>
+          <div class="week-toggle">▼</div>
+        </div>
+        <div class="week-body">
+          <div class="week-body-inner">${bodyHtml}</div>
+        </div>
+      </div>`;
+  });
+
+  document.getElementById('weeks-container').innerHTML = html;
+}
+
+function renderNav(monthNum) {
+  document.getElementById('btn-prev').disabled = monthNum <= 1;
+  document.getElementById('btn-next').disabled = monthNum >= 13;
+  document.getElementById('month-dropdown').value = monthNum;
+}
+
+function renderOverall() {
+  const {done, total} = getTotalCompletion();
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('overall-pct').textContent = pct + '%';
+  document.getElementById('overall-fill').style.width = pct + '%';
+  document.getElementById('tasks-done-label').textContent = `${done} of ${total} items`;
+
+  const monthsDone = Array.from({length:13}, (_,i)=>i+1).filter(isMonthComplete).length;
+  document.getElementById('months-done-label').textContent = `${monthsDone} of 13 months complete`;
+
+  // (hero celebrate animation removed — milestone modal handles celebration)
+
+  // Month complete banner
+  const banner = document.getElementById('completion-banner');
+  banner.className = isMonthComplete(state.currentMonth)
+    ? 'completion-banner text-center py-8 px-6 mb-5'
+    : 'hidden';
+
+  // Rank badge in hero
+  const rank = getCurrentRank(pct);
+  const badge = document.getElementById('rank-badge');
+  if (badge) {
+    if (rank) {
+      badge.textContent = `${rank.emoji} ${rank.name}`;
+      badge.classList.remove('hidden');
+    } else {
+      badge.textContent = '';
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Streak badge in hero
+  const streak = computeStreak();
+  const streakBadge = document.getElementById('streak-badge');
+  if (streakBadge) {
+    if (streak >= 1) {
+      streakBadge.textContent = `🔥 ${streak} day${streak === 1 ? '' : 's'}`;
+      streakBadge.classList.remove('hidden');
+    } else {
+      streakBadge.classList.add('hidden');
+    }
+  }
+
+  // Milestone detection — fire once per threshold (5 pin tiers)
+  [20, 40, 60, 80, 100].forEach(threshold => {
+    if (pct >= threshold && !state.celebrated[threshold]) {
+      state.celebrated[threshold] = true;
+      saveState();
+      showMilestone(threshold);
+    }
+  });
+}
+
+// ─── Milestones / confetti ───────────────────────────────────────────────────
+
+function showMilestone(pct) {
+  const m = MILESTONES[pct];
+  if (!m) return;
+  document.getElementById('milestone-emoji').textContent = m.emoji;
+  document.getElementById('milestone-pct').textContent = pct + '%';
+  document.getElementById('milestone-title').textContent = m.title;
+  document.getElementById('milestone-msg').textContent = m.msg;
+  document.getElementById('milestone-overlay').classList.add('visible');
+  spawnConfetti();
+  haptic();
+}
+
+function dismissMilestone(e) {
+  if (e && e.target && e.target.id !== 'milestone-overlay') return;
+  document.getElementById('milestone-overlay').classList.remove('visible');
+}
+
+function spawnConfetti() {
+  const styles = getComputedStyle(document.documentElement);
+  // Pull theme colors so confetti stays on-brand
+  const palette = [
+    'var(--c-500)', 'var(--c-700)', 'var(--c-400)',
+    'var(--a-500)', 'var(--a-400)', 'var(--a-300)'
+  ];
+  const N = 60;
+  for (let i = 0; i < N; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (Math.random() * 100) + 'vw';
+    piece.style.background = palette[i % palette.length];
+    piece.style.animationDuration = (2.4 + Math.random() * 2) + 's';
+    piece.style.animationDelay = (Math.random() * 0.6) + 's';
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+    piece.style.borderRadius = (Math.random() > 0.5 ? '2px' : '99px');
+    piece.style.width  = (8 + Math.random() * 6) + 'px';
+    piece.style.height = (12 + Math.random() * 8) + 'px';
+    document.body.appendChild(piece);
+    // Clean up after animation
+    setTimeout(() => piece.remove(), 5500);
+  }
+}
+
+// ─── Greeting ────────────────────────────────────────────────────────────────
+
+function renderGreeting() {
+  const el = document.getElementById('hero-greeting');
+  if (!el) return;
+  const now = new Date();
+  const lastVisit = state.lastVisit ? new Date(state.lastVisit) : null;
+  const hoursSince = lastVisit ? (now - lastVisit) / 36e5 : Infinity;
+
+  let greeting;
+  if (!lastVisit) {
+    greeting = "Welcome — let's begin 👋";
+  } else if (hoursSince > 24 * 7) {
+    greeting = "Welcome back — pick up where you left off 💜";
+  } else if (hoursSince > 24) {
+    greeting = "Welcome back 👋";
+  } else {
+    const h = now.getHours();
+    if      (h < 5)  greeting = "The Carrithers IBO 52-Week Training";
+    else if (h < 12) greeting = "Good morning ☕";
+    else if (h < 17) greeting = "Good afternoon ☀️";
+    else if (h < 22) greeting = "Good evening 🌆";
+    else             greeting = "Good night 🌙";
+  }
+  el.textContent = greeting;
+
+  // Update lastVisit for next time
+  state.lastVisit = now.toISOString();
+  saveState();
+}
+
+function renderNoteCard(monthNum) {
+  const text = MONTHLY_NOTES[monthNum];
+  if (!text) { document.getElementById('note-card-wrap').innerHTML = ''; return; }
+  // Default to expanded if user hasn't seen this month's note before
+  if (state.notesExpanded[monthNum] === undefined) {
+    state.notesExpanded[monthNum] = !state.notesSeen[monthNum];
+  }
+  const expanded = state.notesExpanded[monthNum];
+  document.getElementById('note-card-wrap').innerHTML = `
+    <div class="note-card ${expanded?'expanded':''}" id="note-card">
+      <div class="note-header" onclick="toggleNote()">
+        <h3>A note for Month ${monthNum}</h3>
+        <span class="note-toggle">▼</span>
+      </div>
+      <div class="note-body">
+        <div class="note-body-inner">${text}</div>
+      </div>
+    </div>`;
+  // Mark as seen
+  if (expanded && !state.notesSeen[monthNum]) {
+    state.notesSeen[monthNum] = true;
+    saveState();
+  }
+}
+
+function toggleNote() {
+  const m = state.currentMonth;
+  state.notesExpanded[m] = !state.notesExpanded[m];
+  state.notesSeen[m] = true;
+  const card = document.getElementById('note-card');
+  if (card) card.classList.toggle('expanded', state.notesExpanded[m]);
+  saveState();
+}
+
+function renderMonth(monthNum) {
+  state.currentMonth = monthNum;
+  renderNoteCard(monthNum);
+  renderMonthSummary(monthNum);
+  renderGoalsCard(monthNum);
+  renderWeeks(monthNum);
+  renderNav(monthNum);
+  renderOverall();
+  renderMonthDropdown();
+  renderPaceStatus();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ─── HANDLERS ────────────────────────────────────────────────────────────────
+
+function haptic() {
+  if (navigator.vibrate) try { navigator.vibrate(10); } catch(e) {}
+}
+
+// ─── Week date math (#1) ─────────────────────────────────────────────────────
+function getWeekDates(weekNum) {
+  if (!state.programStartDate) return null;
+  const start = new Date(state.programStartDate + 'T00:00:00');
+  start.setDate(start.getDate() + (weekNum - 1) * 7);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  return { start, end };
+}
+
+function formatDateRange(weekNum) {
+  const r = getWeekDates(weekNum);
+  if (!r) return '';
+  const opts = { month: 'short', day: 'numeric' };
+  const yearOpts = { month: 'short', day: 'numeric', year: 'numeric' };
+  const sameYear = r.start.getFullYear() === r.end.getFullYear();
+  return `${r.start.toLocaleDateString('en-US', opts)} – ${r.end.toLocaleDateString('en-US', sameYear ? opts : yearOpts)}`;
+}
+
+function getCurrentProgramWeek() {
+  if (!state.programStartDate) return null;
+  const start = new Date(state.programStartDate + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = Math.floor((today - start) / 86400000);
+  return Math.max(1, Math.min(52, Math.floor(days / 7) + 1));
+}
+
+function getPaceStatus() {
+  const cur = getCurrentProgramWeek();
+  if (!cur) return null;
+  // Find latest fully-complete week
+  let latestComplete = 0;
+  TRACKER_DATA.weeks.forEach(w => {
+    const c = getWeekCompletion(w.week);
+    if (c.total > 0 && c.done === c.total && w.week > latestComplete) latestComplete = w.week;
+  });
+  const diff = latestComplete - (cur - 1);   // how far ahead/behind
+  return { currentWeek: cur, latestComplete, diff };
+}
+
+// ─── Task counter parsing (#3) ────────────────────────────────────────────────
+function extractGoalsFromTask(text) {
+  const goals = [];
+  let m;
+  if ((m = text.match(/\b(\d+)\+?\s+Make Awares?\b/i)))      goals.push({ key:'MA', label:'MAs',   target:parseInt(m[1]) });
+  if ((m = text.match(/\b(\d+)\+?\s+Drop Messages?\b/i)))    goals.push({ key:'DM', label:'DMs',   target:parseInt(m[1]) });
+  if ((m = text.match(/\bCall\s+(\d+)\s+people?\b/i)))       goals.push({ key:'CALL', label:'Calls', target:parseInt(m[1]) });
+  if ((m = text.match(/\bTalk to\s+(\d+)\+?\s+person\b/i))) goals.push({ key:'TALK', label:'Talks', target:parseInt(m[1]) });
+  return goals;
+}
+
+function getCounterValue(taskId, goalKey) {
+  return (state.taskCounters[taskId] || {})[goalKey] || 0;
+}
+
+function setCounterValue(taskId, goalKey, val) {
+  if (!state.taskCounters[taskId]) state.taskCounters[taskId] = {};
+  if (val <= 0) delete state.taskCounters[taskId][goalKey];
+  else state.taskCounters[taskId][goalKey] = val;
+}
+
+function isCounterTaskComplete(taskId, goals) {
+  return goals.every(g => getCounterValue(taskId, g.key) >= g.target);
+}
+
+// ─── Daily habit grid (#7) ────────────────────────────────────────────────────
+const HABIT_DAYS = ['M','T','W','T','F','S','S'];
+
+function getHabitDay(taskId, dayIdx) {
+  return !!(state.habitDays[taskId] && state.habitDays[taskId][dayIdx]);
+}
+
+function setHabitDay(taskId, dayIdx, val) {
+  if (!state.habitDays[taskId]) state.habitDays[taskId] = {};
+  if (val) state.habitDays[taskId][dayIdx] = true;
+  else delete state.habitDays[taskId][dayIdx];
+}
+
+function getHabitProgress(taskId) {
+  const obj = state.habitDays[taskId] || {};
+  return Object.keys(obj).length;
+}
+
+function todayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function recordActivity() {
+  if (!state.activityDays) state.activityDays = {};
+  state.activityDays[todayKey()] = true;
+}
+
+function computeStreak() {
+  if (!state.activityDays || Object.keys(state.activityDays).length === 0) return 0;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  let streak = 0;
+  for (let i = 0; i < 366; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const key = `${y}-${m}-${day}`;
+    if (state.activityDays[key]) {
+      streak++;
+    } else if (i === 0) {
+      // Today has no activity yet — that's OK, keep checking from yesterday
+      continue;
+    } else {
+      break;
+    }
+  }
+  return streak;
+}
+
+function handleTaskCheck(el) {
+  const id = el.dataset.id;
+  if (el.checked) { state.completedTasks[id] = true; recordActivity(); }
+  else delete state.completedTasks[id];
+  el.closest('.task-item').className = 'task-item' + (el.checked?' done':'');
+  haptic();
+  // Re-render the affected week card and summary (light, not full month)
+  renderMonthSummary(state.currentMonth);
+  renderWeeks(state.currentMonth);
+  renderOverall();
+  renderMonthDropdown();
+  saveState();
+}
+
+function handleGoalCheck(el) {
+  const id = el.dataset.goalId;
+  if (el.checked) { state.completedGoals[id] = true; recordActivity(); }
+  else delete state.completedGoals[id];
+  el.closest('.goal-item').className = 'goal-item' + (el.checked?' done':'');
+  haptic();
+  renderMonthSummary(state.currentMonth);
+  renderGoalsCard(state.currentMonth);
+  renderOverall();
+  renderMonthDropdown();
+  saveState();
+}
+
+// ─── Counter button handler (#3) ──────────────────────────────────────────────
+function handleCounterClick(btn) {
+  const taskId = btn.dataset.taskId;
+  const goalKey = btn.dataset.goal;
+  const delta = parseInt(btn.dataset.delta);
+  const target = parseInt(btn.dataset.target);
+  const cur = getCounterValue(taskId, goalKey);
+  const next = Math.max(0, Math.min(target * 2, cur + delta));   // cap at 2x target
+  setCounterValue(taskId, goalKey, next);
+  if (delta > 0) recordActivity();
+  haptic();
+  // Auto-check completedTasks if all goals met (or uncheck if dropped)
+  // (we use isTaskDone in re-render; just refresh UI)
+  renderMonthSummary(state.currentMonth);
+  renderWeeks(state.currentMonth);
+  renderOverall();
+  renderMonthDropdown();
+  saveState();
+}
+
+// ─── Habit-day handler (#7) ───────────────────────────────────────────────────
+function handleHabitDayClick(btn) {
+  const taskId = btn.dataset.taskId;
+  const day = parseInt(btn.dataset.day);
+  const cur = getHabitDay(taskId, day);
+  setHabitDay(taskId, day, !cur);
+  if (!cur) recordActivity();
+  haptic();
+  renderMonthSummary(state.currentMonth);
+  renderWeeks(state.currentMonth);
+  renderOverall();
+  renderMonthDropdown();
+  saveState();
+}
+
+// ─── Per-week notes handler (#4) ──────────────────────────────────────────────
+let noteSaveTimer = null;
+function handleNoteInput(textarea) {
+  const w = parseInt(textarea.dataset.week);
+  if (!state.weekNotes) state.weekNotes = {};
+  state.weekNotes[w] = textarea.value;
+  // Debounce save so we don't hammer localStorage on every keystroke
+  clearTimeout(noteSaveTimer);
+  noteSaveTimer = setTimeout(() => saveState(), 400);
+}
+
+// ─── Export / Import (#5) ─────────────────────────────────────────────────────
+function exportBackup() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const today = new Date();
+  const stamp = today.toISOString().slice(0, 10);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ibo-tracker-backup-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  haptic();
+}
+
+function importBackupClick() {
+  const input = document.getElementById('import-input');
+  if (input) input.click();
+}
+
+function importBackup(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (typeof data !== 'object' || !data) throw new Error('Invalid file');
+      showToast(
+        'Import this backup?',
+        'This will replace all of your current progress, theme, and settings with the data from the file.',
+        () => {
+          Object.assign(state, data);
+          saveState();
+          renderMonth(state.currentMonth);
+          haptic();
+        },
+        'Import'
+      );
+    } catch (err) {
+      alert('Could not read that file. Make sure it\'s a tracker backup.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ─── Set program start date (#1) ──────────────────────────────────────────────
+function promptStartDate() {
+  const today = new Date().toISOString().slice(0, 10);
+  const cur = state.programStartDate || today;
+  const val = prompt('Set your program start date (the Monday of your Week 1) in YYYY-MM-DD format:', cur);
+  if (val && /^\d{4}-\d{2}-\d{2}$/.test(val)) {
+    state.programStartDate = val;
+    saveState();
+    renderMonth(state.currentMonth);
+    renderPaceStatus();
+  }
+}
+
+function renderPaceStatus() {
+  const el = document.getElementById('pace-status');
+  if (!el) return;
+  const status = getPaceStatus();
+  if (!status) {
+    el.innerHTML = '<button type="button" class="pace-btn" onclick="promptStartDate()">Set program start date</button>';
+    return;
+  }
+  let label;
+  const d = status.diff;
+  if (d > 0)      label = `On pace · Week ${status.currentWeek}, ${d} ahead`;
+  else if (d < 0) label = `Week ${status.currentWeek} · ${Math.abs(d)} behind`;
+  else            label = `On pace · Week ${status.currentWeek}`;
+  el.innerHTML = `<span class="pace-pill">${label}</span> <button type="button" class="pace-btn-small" onclick="promptStartDate()" aria-label="Change start date">⋯</button>`;
+}
+
+// ─── Theme ───────────────────────────────────────────────────────────────────
+function setTheme(name) {
+  if (!THEME_COLORS[name]) name = 'plum';
+  document.documentElement.setAttribute('data-theme', name === 'plum' ? '' : name);
+  document.querySelectorAll('.swatch-btn').forEach(b => {
+    const isActive = b.dataset.swatch === name;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+  updateThemeColorMeta();
+  try { localStorage.setItem(THEME_STORAGE_KEY, name); } catch(e) {}
+  haptic();
+}
+
+function setMode(mode) {
+  if (mode !== 'light' && mode !== 'dark' && mode !== 'auto') mode = 'light';
+  let effective = mode;
+  if (mode === 'auto') {
+    effective = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  document.documentElement.setAttribute('data-mode', effective === 'dark' ? 'dark' : '');
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    const isActive = b.dataset.mode === mode;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+  updateThemeColorMeta();
+  try { localStorage.setItem(MODE_STORAGE_KEY, mode); } catch(e) {}
+  haptic();
+}
+
+function updateThemeColorMeta() {
+  const meta = document.getElementById('theme-color-meta');
+  if (!meta) return;
+  const isDark = document.documentElement.getAttribute('data-mode') === 'dark';
+  const themeName = document.documentElement.getAttribute('data-theme') || 'plum';
+  const baseColor = THEME_COLORS[themeName] || THEME_COLORS.plum;
+  meta.setAttribute('content', isDark ? '#0d0a1a' : baseColor);
+}
+
+// React to OS-level light/dark changes when the user picked Auto
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    let savedMode = 'light';
+    try { savedMode = localStorage.getItem(MODE_STORAGE_KEY) || 'light'; } catch(e) {}
+    if (savedMode === 'auto') setMode('auto');
+  });
+}
+
+// ─── Swipe navigation (left/right between months) ────────────────────────────
+let touchStartX = 0, touchStartY = 0, touchTime = 0;
+function onTouchStart(e) {
+  if (e.touches.length !== 1) return;
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchTime = Date.now();
+}
+function onTouchEnd(e) {
+  if (e.changedTouches.length !== 1) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  const dt = Date.now() - touchTime;
+  // Require horizontal swipe, faster than 600ms, longer than 80px, and mostly horizontal
+  if (dt < 600 && Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    // Don't swipe if the user touched a checkbox/button/select
+    const tgt = e.target;
+    if (tgt.closest('input, button, select, .toast-box, .week-body, .goals-body')) return;
+    if (dx < 0) navigateMonth(1);
+    else navigateMonth(-1);
+  }
+}
+
+// ─── Scroll-to-top FAB ───────────────────────────────────────────────────────
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  haptic();
+}
+function onScroll() {
+  const fab = document.getElementById('fab-top');
+  if (!fab) return;
+  fab.classList.toggle('visible', window.scrollY > 400);
+}
+
+// ─── Custom toast (replaces native confirm) ─────────────────────────────────
+let pendingConfirm = null;
+function showToast(title, msg, onConfirm, confirmLabel) {
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-msg').textContent = msg;
+  const btn = document.getElementById('toast-confirm-btn');
+  btn.textContent = confirmLabel || 'Confirm';
+  pendingConfirm = onConfirm;
+  document.getElementById('toast-overlay').classList.add('visible');
+}
+function dismissToast(e) {
+  // Only dismiss if called explicitly (no event) or the overlay backdrop itself was clicked
+  if (e && e.target && e.target.id !== 'toast-overlay') return;
+  document.getElementById('toast-overlay').classList.remove('visible');
+  pendingConfirm = null;
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('toast-confirm-btn');
+  if (cb) cb.addEventListener('click', () => {
+    if (pendingConfirm) pendingConfirm();
+    dismissToast();
+  });
+});
+
+function navigateMonth(delta) {
+  const next = Math.max(1, Math.min(13, state.currentMonth + delta));
+  renderMonth(next);
+}
+
+function onMonthChange(val) {
+  renderMonth(parseInt(val));
+}
+
+function toggleWeek(weekNum) {
+  const expanded = !state.expandedWeeks[weekNum];
+  // Accordion mode: collapse other weeks in the same month
+  if (expanded && state.accordionMode) {
+    getMonthWeeks(state.currentMonth).forEach(w => {
+      if (w.week !== weekNum) {
+        state.expandedWeeks[w.week] = false;
+        const otherCard = document.getElementById('week-card-'+w.week);
+        if (otherCard) otherCard.classList.remove('expanded');
+      }
+    });
+  }
+  state.expandedWeeks[weekNum] = expanded;
+  const card = document.getElementById('week-card-'+weekNum);
+  if (card) card.classList.toggle('expanded', expanded);
+  saveState();
+}
+
+function toggleGoalsCard() {
+  const m = state.currentMonth;
+  const current = state.goalsExpanded[m] !== false;
+  state.goalsExpanded[m] = !current;
+  const card = document.getElementById('goals-card');
+  if (card) card.classList.toggle('expanded', !current);
+  saveState();
+}
+
+function scrollToWeek(weekNum) {
+  // Auto-expand the week if it's not already
+  if (!state.expandedWeeks[weekNum]) {
+    state.expandedWeeks[weekNum] = true;
+    const card = document.getElementById('week-card-'+weekNum);
+    if (card) card.classList.add('expanded');
+    saveState();
+  }
+  const target = document.getElementById('week-card-'+weekNum);
+  if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function resetProgress() {
+  showToast(
+    'Reset all progress?',
+    'This will clear every checked task, goal, and milestone celebration across all 13 months. This cannot be undone.',
+    () => {
+      state.completedTasks = {};
+      state.completedGoals = {};
+      state.taskCounters = {};
+      state.habitDays = {};
+      state.weekNotes = {};
+      state.expandedWeeks = {};
+      state.goalsExpanded = {};
+      state.celebrated = {};
+      state.notesSeen = {};
+      state.notesExpanded = {};
+      state.activityDays = {};
+      state.currentMonth = 1;
+      // Note: keep programStartDate so the user doesn't have to re-set it
+      haptic();
+      saveState();
+      renderMonth(state.currentMonth);
+    },
+    'Reset'
+  );
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore mode + theme first (avoids a flash of default colors on load)
+  let savedMode = 'light';
+  try { savedMode = localStorage.getItem(MODE_STORAGE_KEY) || 'light'; } catch(e) {}
+  setMode(savedMode);
+
+  let savedTheme = 'plum';
+  try { savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'plum'; } catch(e) {}
+  setTheme(savedTheme);
+
+  // Detect first-ever launch (no saved state) BEFORE loadState mutates anything
+  const isFirstLaunch = !localStorage.getItem(STORAGE_KEY);
+  loadState();
+  if (isFirstLaunch) {
+    state.currentMonth = 1;       // always start new users on Month 1
+  }
+  renderGreeting();
+
+  // Don't fire milestone celebrations for thresholds the user has already passed
+  if (Object.keys(state.celebrated).length === 0) {
+    const tc = getTotalCompletion();
+    const startPct = tc.total ? Math.round(tc.done/tc.total*100) : 0;
+    [20, 40, 60, 80, 100].forEach(t => { if (startPct >= t) state.celebrated[t] = true; });
+  }
+
+  // Auto-expand the first incomplete week of the current month if no expansions saved
+  if (Object.keys(state.expandedWeeks).length === 0) {
+    const weeks = getMonthWeeks(state.currentMonth);
+    const firstIncomplete = weeks.find(w => {
+      const c = getWeekCompletion(w.week);
+      return c.done < c.total;
+    });
+    if (firstIncomplete) state.expandedWeeks[firstIncomplete.week] = true;
+    else if (weeks[0]) state.expandedWeeks[weeks[0].week] = true;
+  }
+  renderMonth(state.currentMonth);
+  if (state.lastSaved) {
+    document.getElementById('last-saved-label').textContent = 'Last saved: ' + formatTime(state.lastSaved);
+  }
+
+  // Swipe nav + scroll listener
+  document.addEventListener('touchstart', onTouchStart, {passive: true});
+  document.addEventListener('touchend', onTouchEnd, {passive: true});
+  window.addEventListener('scroll', onScroll, {passive: true});
+});
+</script>
+</body>
+</html>
