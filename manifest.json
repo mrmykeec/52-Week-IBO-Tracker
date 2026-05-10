@@ -1,6 +1,6 @@
 {
   "name": "52-Week IBO Tracker",
-  "short_name": "IBO Tracker",
+  "short_name": "52 Training",
   "description": "52-week IBO training tracker built around the Carrithers curriculum.",
   "start_url": "./52-week-tracker.html",
   "scope": "./",
