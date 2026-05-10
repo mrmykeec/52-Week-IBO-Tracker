@@ -658,7 +658,6 @@
       -webkit-backdrop-filter: blur(4px);
     }
     .rank-badge.hidden { display: none; }
-    .streak-badge { margin-top:4px; }
 
     /* ── Greeting (above hero title) ──────────────────────────────── */
     .hero-greeting {
@@ -1371,9 +1370,9 @@
       border-color: rgba(var(--c-500-rgb), 0.3) !important;
     }
 
-    /* ── v5: rank/streak tap reassurance toast (#17) ───────────────── */
-    #rank-badge, #streak-badge { cursor: pointer; transition: transform .15s; }
-    #rank-badge:hover, #streak-badge:hover { transform: scale(1.05); }
+    /* ── v5: rank badge tap reassurance toast (#17) ────────────────── */
+    #rank-badge { cursor: pointer; transition: transform .15s; }
+    #rank-badge:hover { transform: scale(1.05); }
     .reassure-toast {
       position: fixed;
       left: 50%;
@@ -1687,7 +1686,6 @@
 
     /* Pro pass: hero stats row */
     .hero-stats { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:flex-end; margin-top:6px; }
-    .streak-badge { margin-top:0 !important; }
 
     /* Pro pass: subtle hover lift on collapsed cards */
     .week-card:not(.expanded):hover,
@@ -1907,8 +1905,6 @@
       position:sticky; top:8px; z-index:10;
     }
 
-    /* Celebrate animation */
-    /* (rainbow shimmer celebration removed — milestones modal handles celebration now) */
 
     /* Completion banner */
     .completion-banner {
@@ -2358,7 +2354,6 @@
           <p class="text-xs uppercase tracking-wider opacity-80 mt-1">complete</p>
           <div class="hero-stats">
             <div id="rank-badge" class="rank-badge hidden" onclick="showReassurance()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReassurance();}" role="button" tabindex="0">🦅 Eagle</div>
-            <div id="streak-badge" class="rank-badge hidden" title="Tap for a kind word" onclick="showReassurance()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReassurance();}" role="button" tabindex="0">🔥 1</div>
           </div>
         </div>
       </div>
@@ -3253,7 +3248,6 @@ function getInitialState() {
     jotPick: null,           // {taskId, date} — today's persistent JOT selection
     todayWeek: null,         // user-controlled current week in Today view (null = use calendar/auto)
     todayNoteExpanded: false, // whether the per-week notes card is expanded in Today view
-    bestStreak: 0,           // longest consecutive-day streak ever seen
     view: 'today',           // 'today' | 'chapter'
     currentMonth: 1,
     expandedWeeks: {},       // {weekNum: true}
@@ -3261,7 +3255,6 @@ function getInitialState() {
     notesExpanded: {},       // {month: true|false} — collapsed after first view
     notesSeen:     {},       // {month: true} — has the user seen this month's note?
     celebrated:    {},       // {20:true, 40:true, 60:true, 80:true, 100:true}
-    activityDays:  {},       // {"YYYY-MM-DD": true} — for streak tracking
     accordionMode: true,
     lastVisit: null,         // ISO timestamp of last load (for greeting)
     lastSaved: null
@@ -3676,7 +3669,7 @@ function renderOverall() {
   const monthsDone = Array.from({length:13}, (_,i)=>i+1).filter(isMonthComplete).length;
   document.getElementById('months-done-label').textContent = `${monthsDone} of 13 months complete`;
 
-  // (hero celebrate animation removed — milestone modal handles celebration)
+
 
   // Month complete banner
   const banner = document.getElementById('completion-banner');
@@ -3698,25 +3691,6 @@ function renderOverall() {
     }
   }
 
-  // Streak badge in hero — current + lifetime best
-  const streak = computeStreak();
-  // Update the all-time best if today's streak surpasses it
-  if (streak > (state.bestStreak || 0)) state.bestStreak = streak;
-  const best = state.bestStreak || 0;
-  const streakBadge = document.getElementById('streak-badge');
-  if (streakBadge) {
-    if (streak >= 1 || best >= 1) {
-      let label;
-      if (streak === 0)            label = `🔥 0 · best ${best}`;
-      else if (streak >= best)     label = `🔥 ${streak} day${streak === 1 ? '' : 's'} · best!`;
-      else                         label = `🔥 ${streak} · best ${best}`;
-      streakBadge.textContent = label;
-      streakBadge.title = `Current streak: ${streak} day${streak===1?'':'s'} · Lifetime best: ${best}`;
-      streakBadge.classList.remove('hidden');
-    } else {
-      streakBadge.classList.add('hidden');
-    }
-  }
 
   // Milestone detection — fire once per threshold (5 pin tiers)
   MILESTONE_THRESHOLDS.forEach(threshold => {
@@ -4354,7 +4328,6 @@ function handleJotCounterClick(taskId, goalKey, target, delta) {
   const cur = getCounterValue(taskId, goalKey);
   const next = Math.max(0, cur + delta);
   setCounterValue(taskId, goalKey, next);
-  if (delta > 0) recordActivity();
   saveState();
   haptic();
   // Update only the counters section of the modal (don't re-render — that would steal focus)
@@ -4441,7 +4414,6 @@ function markJOTDone() {
     const goals = extractGoalsFromTask(task.text);
     if (goals.length > 0) goals.forEach(g => setCounterValue(id, g.key, g.target));
     else state.completedTasks[id] = true;
-    recordActivity();
   }
   // Clear today's pick — the user finished it, so next tap picks fresh
   state.jotPick = null;
@@ -4540,52 +4512,6 @@ function todayKey() {
   return `${y}-${m}-${day}`;
 }
 
-function recordActivity() {
-  if (!state.activityDays) state.activityDays = {};
-  state.activityDays[todayKey()] = true;
-}
-
-function computeBestStreak() {
-  if (!state.activityDays || Object.keys(state.activityDays).length === 0) return 0;
-  const dates = Object.keys(state.activityDays).sort();
-  let best = 0, cur = 0, prev = null;
-  for (const d of dates) {
-    if (prev) {
-      const prevDate = new Date(prev + 'T00:00:00');
-      const curDate = new Date(d + 'T00:00:00');
-      const diffDays = Math.round((curDate - prevDate) / 86400000);
-      cur = (diffDays === 1) ? cur + 1 : 1;
-    } else {
-      cur = 1;
-    }
-    if (cur > best) best = cur;
-    prev = d;
-  }
-  return best;
-}
-
-function computeStreak() {
-  if (!state.activityDays || Object.keys(state.activityDays).length === 0) return 0;
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  let streak = 0;
-  for (let i = 0; i < 366; i++) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    const key = `${y}-${m}-${day}`;
-    if (state.activityDays[key]) {
-      streak++;
-    } else if (i === 0) {
-      // Today has no activity yet — that's OK, keep checking from yesterday
-      continue;
-    } else {
-      break;
-    }
-  }
-  return streak;
-}
 
 function handleTaskCheck(el) {
   const id = el.dataset.id;
@@ -4596,12 +4522,11 @@ function handleTaskCheck(el) {
   if (goals.length > 0) {
     if (el.checked) {
       goals.forEach(g => setCounterValue(id, g.key, g.target));
-      recordActivity();
     } else {
       goals.forEach(g => setCounterValue(id, g.key, 0));
     }
   } else {
-    if (el.checked) { state.completedTasks[id] = true; recordActivity(); }
+    if (el.checked) { state.completedTasks[id] = true; }
     else delete state.completedTasks[id];
   }
   el.closest('.task-item').className = 'task-item' + (el.checked?' done':'');
@@ -4621,7 +4546,7 @@ function handleTaskCheck(el) {
 
 function handleGoalCheck(el) {
   const id = el.dataset.goalId;
-  if (el.checked) { state.completedGoals[id] = true; recordActivity(); }
+  if (el.checked) { state.completedGoals[id] = true; }
   else delete state.completedGoals[id];
   el.closest('.goal-item').className = 'goal-item' + (el.checked?' done':'');
   haptic();
@@ -4647,7 +4572,6 @@ function handleCounterClick(btn) {
   // No upper cap — overachievers can log past the target. Floor at 0.
   const next = Math.max(0, cur + delta);
   setCounterValue(taskId, goalKey, next);
-  if (delta > 0) recordActivity();
   haptic();
   if (state.view === 'today') {
     renderToday();
@@ -4693,8 +4617,7 @@ function exportBackup() {
       goalsDone,
       counterTasksWithProgress,
       currentMonth:     state.currentMonth,
-      programStartDate: state.programStartDate,
-      bestStreak:       state.bestStreak || 0
+      programStartDate: state.programStartDate
     },
     theme,
     mode,
@@ -4779,10 +4702,6 @@ function importBackup(file) {
             }
           });
         });
-        // Backfill best-streak from imported activity if it wasn't included
-        if (!state.bestStreak && state.activityDays && Object.keys(state.activityDays).length > 0) {
-          state.bestStreak = computeBestStreak();
-        }
         // Validate todayWeek (out-of-range or removed week from a future schema → null)
         if (state.todayWeek && !getWeek(state.todayWeek)) state.todayWeek = null;
         if (state.currentMonth && (state.currentMonth < 1 || state.currentMonth > 13)) state.currentMonth = 1;
@@ -5019,13 +4938,11 @@ function resetProgress() {
       state.celebrated = {};
       state.notesSeen = {};
       state.notesExpanded = {};
-      state.activityDays = {};
       state.currentMonth = 1;
       state.view = 'today';             // return to Today view
       state.programStartDate = null;    // clear the start date for a true fresh slate
       state.todayWeek = null;           // let Today view auto-find the first week
       state.todayNoteExpanded = false;  // and start with notes collapsed again
-      state.bestStreak = 0;
       haptic();
       saveState();
       setView('today');
@@ -5051,7 +4968,7 @@ const TOUR_STEPS = [
   { selector: '#today-view .task-item',   title: 'Your week.',         body: 'Here are this week\'s tasks. Tap a checkbox to mark one done. That\'s the whole loop.', placement: 'below' },
   { selector: '.jot-button',              title: 'Overwhelmed?',       body: 'If a week feels heavy, tap this and the tracker picks one task for you. Reroll if you don\'t like it.', placement: 'below' },
   { selector: '.today-notes-card',        title: 'Reflect as you go.', body: 'Each week has a notes area for thoughts, takeaways, or who you talked to. Tap to expand.', placement: 'below' },
-  { selector: '#streak-badge',            title: 'Track the journey.', body: 'Your streak counts calendar days. Ranks unlock as you go: 🦅 Eagle (20%), ⭐ Double Eagle (40%), 🏆 Platinum (60%), 💚 Emerald (80%), 💎 Diamond (100%).', placement: 'below' },
+  { selector: '#rank-badge',              title: 'Track the journey.', body: 'Ranks unlock as you go: 🦅 Eagle (20%), ⭐ Double Eagle (40%), 🏆 Platinum (60%), 💚 Emerald (80%), 💎 Diamond (100%).', placement: 'below' },
   { selector: null,                       title: 'From Jolene.',       body: 'If you finish all of a week\'s tasks before the week is over, move on to the next week. But don\'t jump ahead until every task for the current week is done, even the ones you don\'t want to do.', placement: 'center' },
   { selector: null,                       title: 'Keep it one tap away.', body: 'On iPhone: tap Share, then Add to Home Screen. On Android: tap the menu (⋮) and Install app or Add to Home Screen. To swap the default icon for your own photo or emoji, long-press the new shortcut and choose Edit.', placement: 'center' },
   { selector: null,                       title: 'You\'re set.',       body: 'Made with 💜 for Jackie, who deserves every dream she\'s chasing.', placement: 'center', isFinal: true }
@@ -5107,7 +5024,7 @@ function renderTourStep() {
   const target = step.selector ? document.querySelector(step.selector) : null;
   const vw = window.innerWidth, vh = window.innerHeight;
 
-  // If the target is hidden (e.g. streak badge before any activity), fall back to center
+  // If the target is hidden (e.g. progress badge before start date is set), fall back to center
   const isHidden = target && (target.offsetParent === null || target.classList.contains('hidden'));
   if (target && !isHidden && step.placement !== 'center') {
     // Make sure the target is on screen before measuring
@@ -5245,9 +5162,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-  // Backfill best-streak from existing activity history if missing
-  if (!state.bestStreak) state.bestStreak = computeBestStreak();
 
   renderGreeting();
 
